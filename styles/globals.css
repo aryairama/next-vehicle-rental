@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: Playfair_Display;
+  src: url(/assets/font/Playfair_Display/static/PlayfairDisplay-Regular.ttf);
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url(/assets/font/Nunito/Nunito-Regular.ttf);
+} 
+
+@font-face{
+  font-family: Mulish;
+  src: url(/assets/font/Mulish/static/Mulish-Regular.ttf);
+}

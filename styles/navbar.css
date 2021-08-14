@@ -28,10 +28,12 @@
 }
 
 .li-menu-a:hover {
+  @apply border-b-2 pb-2 border-primary;
   color: #202336;
 }
 
 .li-menu.active > .li-menu-a {
+  @apply border-b-2 pb-2 border-primary;
   color: #202336;
 }
 
@@ -39,15 +41,24 @@
   @apply px-8 py-2 border rounded-md;
 }
 
-.btn-primary {
-  @apply border;
-  color: #393939;
-  border-color: #ffcd61;
+.btn-outline-primary {
+  @apply border border-primary text-secondary;
 }
 
-.btn-primary:hover {
-  background-color: #ffcd61;
-  border-color: #ffcd61;
+.btn-outline-primary:hover {
+  @apply bg-primary border-primary;
+}
+
+.btn-primary {
+  @apply text-secondary bg-primary
+}
+
+.btn-secondary {
+  @apply text-primary bg-secondary;
+}
+
+.btn-white {
+  @apply text-secondary bg-white
 }
 
 .navbar-menu-right.show-navbar {

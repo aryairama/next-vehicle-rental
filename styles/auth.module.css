@@ -1,0 +1,21 @@
+.auth-wrapper {
+  background: url(/assets/img/auth1.png);
+  @apply w-full h-full bg-cover bg-center bg-no-repeat inline-block md:min-h-screen;
+}
+.auth-content {
+  background-color: #00000066;
+  @apply md:min-h-screen;
+}
+.container-content {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  @apply flex flex-wrap flex-row justify-between w-full h-full container;
+}
+
+.text-banner {
+  @apply text-white text-6xl font-Playfair_Display font-bold leading-tight;
+}
+
+.question-account{
+  @apply text-white text-2xl mt-6
+}

@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import logo from '../../../assets/icon/logo.png';
-import listIcon from '../../../assets/icon/list.svg'
+import logo from '../../../public/assets/icon/logo.png';
+import listIcon from '../../../public/assets/icon/list.svg';
 import { useState } from 'react';
 const Navbar = (props) => {
-  const [show,setShow] = useState(false)
+  const [show, setShow] = useState(false);
   return (
     <>
       <div className="navbar">
@@ -12,11 +12,11 @@ const Navbar = (props) => {
             <Image src={logo} width="41px" height="41px" />
           </div>
           <div className="block md:hidden">
-            <button onClick={()=> setShow(!show)} className="border border-black rounded-md py-1 px-3">
+            <button onClick={() => setShow(!show)} className="border border-black rounded-md py-1 px-3">
               <Image src={listIcon} />
             </button>
           </div>
-          <div className={`navbar-menu-right ${show ? 'show-navbar':''}`}>
+          <div className={`navbar-menu-right ${show ? 'show-navbar' : ''}`}>
             <ul className="navbar-menu">
               <li className="li-menu active">
                 <a className="li-menu-a" href="">
@@ -39,10 +39,10 @@ const Navbar = (props) => {
                 </a>
               </li>
               <li className="li-menu">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-outline-primary">Login</button>
               </li>
               <li className="li-menu">
-                <button className="btn btn-primary">Register</button>
+                <button className="btn btn-outline-primary">Register</button>
               </li>
             </ul>
           </div>

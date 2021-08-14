@@ -16,7 +16,11 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-
+      secondary: '#393939',
+      primary: '#ffcd61',
+      whitetransparant: '#FFFFFF42',
+      'grey-1': '#848484',
+      'white-1': '#F9F9FB',
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
@@ -270,6 +274,9 @@ module.exports = {
         '"Courier New"',
         'monospace',
       ],
+      Playfair_Display: ['Playfair_Display'],
+      Nunito: ['Nunito'],
+      Mulish: ['Mulish'],
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],
