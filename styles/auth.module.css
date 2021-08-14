@@ -1,6 +1,16 @@
+.auth-wrapper,
+.auth-wrapper2 {
+  @apply w-full h-full md:min-h-screen;
+}
+
 .auth-wrapper {
   background: url(/assets/img/auth1.png);
-  @apply w-full h-full bg-cover bg-center bg-no-repeat inline-block md:min-h-screen;
+  @apply bg-cover bg-center bg-no-repeat;
+}
+
+.auth-wrapper2 {
+  background: url(/assets/img/auth2.png);
+  @apply bg-cover bg-center bg-no-repeat;
 }
 .auth-content {
   background-color: #00000066;
@@ -13,9 +23,27 @@
 }
 
 .text-banner {
-  @apply text-white text-6xl font-Playfair_Display font-bold leading-tight;
+  @apply text-white text-4xl md:text-6xl font-Playfair_Display font-bold leading-tight;
 }
 
-.question-account{
-  @apply text-white text-2xl mt-6
+.question-account {
+  @apply text-white text-xl md:text-2xl mt-6;
+}
+
+.navigation-back {
+  @apply w-full flex flex-row font-Nunito cursor-pointer;
+}
+
+.text-caption {
+  @apply mt-10 self-center font-bold font-Playfair_Display text-white text-4xl md:text-6xl;
+}
+
+.container-forgotpassword {
+  @apply w-full md:w-2/5 flex flex-col mt-24 md:mt-28;
+}
+
+@media (min-width: 768px) {
+  .container-forgotpassword {
+    margin-left: 30%;
+  }
 }

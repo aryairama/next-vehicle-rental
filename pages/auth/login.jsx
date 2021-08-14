@@ -26,7 +26,12 @@ const Login = () => {
             <div className="w-full md:w-2/5 flex flex-col flex-wrap">
               <InputAuth styleContainer="md:mt-9" placeholder="Email" />
               <InputAuth placeholder="Password" />
-              <p className="-mt-3 text-white underline font-normal">Forgot password?</p>
+              <p
+                onClick={() => router.push('/auth/forgotpassword')}
+                className="-mt-3 text-white underline font-normal cursor-pointer"
+              >
+                Forgot password?
+              </p>
               <button className="btn-primary p-4 rounded-lg text-2xl font-bold mt-10">Login</button>
               <button className="btn-white p-4 rounded-lg text-2xl font-bold mt-6 flex flex-row justify-center">
                 <img src="/assets/icon/google.png" alt="icon-google" />
