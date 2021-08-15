@@ -3,5 +3,18 @@
 }
 
 .option {
-    @apply bg-secondary p-0 m-0
+  @apply bg-secondary p-0 m-0;
+}
+
+.input-search {
+  @apply border border-gray-300 rounded-md py-2 w-full outline-none pl-8 pr-12;
+}
+
+.input-search:focus {
+  @apply border-primary transition-all ease-in-out duration-500 font-Nunito text-secondary;
+}
+
+.input-search:focus ~ img {
+  transition: all 500ms ease-in-out;
+  filter: invert(69%) sepia(88%) saturate(277%) hue-rotate(354deg) brightness(102%) contrast(102%);
 }

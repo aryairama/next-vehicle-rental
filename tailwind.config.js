@@ -521,6 +521,8 @@ module.exports = {
     },
     margin: (theme, { negative }) => ({
       auto: 'auto',
+      'margin-navbar': '102.5px',
+      'margin-navbar-1': '140px',
       ...theme('spacing'),
       ...negative(theme('spacing')),
     }),
