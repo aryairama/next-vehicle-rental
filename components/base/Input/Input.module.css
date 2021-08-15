@@ -1,0 +1,7 @@
+.select {
+  @apply appearance-none w-full bg-whitetransparant text-white px-10 py-4 rounded-lg text-lg md:text-2xl outline-none placeholder-white;
+}
+
+.option {
+    @apply bg-secondary p-0 m-0
+}

@@ -1,2 +1,9 @@
 export { default as Navbar } from './Navbar/Navbar';
 export { default as Footer } from './Footer/Footer';
+export { default as CardTemplate } from './Card/CardTemplate';
+export { default as CardContainer } from './Card/CardContainer';
+export { default as CardImgOverlay } from './Card/CardImgOverlay';
+export { default as CardTextOverlay } from './Card/CardTextOverlay';
+export { default as TestimonialsTemplate } from './Testimonials/TestimonialsTemplate';
+export { default as TestimonialDescription } from './Testimonials/TestimonialDescription';
+export { default as TestimonialsProfile } from './Testimonials/TestimonialsProfile';

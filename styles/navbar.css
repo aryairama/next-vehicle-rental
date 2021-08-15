@@ -1,5 +1,5 @@
 .navbar {
-  @apply shadow-md fixed w-full bg-white;
+  @apply shadow-md fixed w-full bg-white top-0 z-50;
 }
 
 .navbar-container {

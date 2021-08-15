@@ -9,9 +9,13 @@
 @font-face {
   font-family: Nunito;
   src: url(/assets/font/Nunito/Nunito-Regular.ttf);
-} 
+}
 
-@font-face{
+@font-face {
   font-family: Mulish;
   src: url(/assets/font/Mulish/static/Mulish-Regular.ttf);
+}
+
+.content {
+  min-height: 100vh;
 }

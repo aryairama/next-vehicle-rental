@@ -1,11 +1,22 @@
 import Image from 'next/image';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import logo from '../../../public/assets/icon/logo.png';
 import listIcon from '../../../public/assets/icon/list.svg';
 import { useState } from 'react';
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
+  const router = useRouter();
+  const formatUrl = ([first, ...last]) => {
+    return first.toUpperCase() + last.join('')
+  }
   return (
     <>
+      <Head>
+        {router.route.split('/')[1] === '' && <title>Vehicle Rental | Home</title>}
+        {router.route.split('/')[1] !== '' && <title>Vehicle Rental | {formatUrl(router.route.split('/')[1])}</title>}
+        <link rel="icon" href="/assets/icon/logo.png" />
+      </Head>
       <div className="navbar">
         <div className="navbar-container container">
           <div className="navbar-menu-left">
@@ -39,10 +50,14 @@ const Navbar = (props) => {
                 </a>
               </li>
               <li className="li-menu">
-                <button className="btn btn-outline-primary">Login</button>
+                <button onClick={() => router.push('/auth/login')} className="btn btn-outline-primary">
+                  Login
+                </button>
               </li>
               <li className="li-menu">
-                <button className="btn btn-outline-primary">Register</button>
+                <button onClick={() => router.push('/auth/register')} className="btn btn-outline-primary">
+                  Register
+                </button>
               </li>
             </ul>
           </div>

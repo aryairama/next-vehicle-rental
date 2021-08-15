@@ -1,73 +1,164 @@
-import Head from 'next/head';
-import { Navbar } from '../components/module';
+import {
+  Navbar,
+  Footer,
+  CardContainer,
+  CardImgOverlay,
+  CardTextOverlay,
+  CardTemplate,
+  TestimonialsTemplate,
+} from '../components/module';
+import { SelectOption } from '../components/base';
+import style from '../styles/home.module.css';
+import authStyle from '../styles/auth.module.css';
 export default function Home() {
+  const location = [
+    {
+      value: '',
+      label: 'Location',
+    },
+    {
+      value: 'jakarta',
+      label: 'Jakarta',
+    },
+    {
+      value: 'malang',
+      label: 'Malang',
+    },
+    {
+      value: 'yogyakarta',
+      label: 'Yogyakarta',
+    },
+  ];
+  const type = [
+    {
+      value: '',
+      label: 'Type',
+    },
+    {
+      value: 'bike',
+      label: 'Bike',
+    },
+    {
+      value: 'cars',
+      label: 'Cars',
+    },
+    {
+      value: 'motorbike',
+      label: 'Motorbike',
+    },
+  ];
+  const payment = [
+    {
+      value: '',
+      label: 'Payment',
+    },
+    {
+      value: 'cash',
+      label: 'Cash',
+    },
+    {
+      value: 'transfer',
+      label: 'Transfer',
+    },
+  ];
   return (
     <>
-      <Navbar/>
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <Head>
-          <title>Create Next App</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
-        <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-          <h1 className="text-6xl font-bold">
-            Welcome to{' '}
-            <a className="text-blue-600" href="https://nextjs.org">
-              Next.js!
-            </a>
-          </h1>
-
-          <p className="mt-3 text-2xl">
-            Get started by editing <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">pages/index.js</code>
-          </p>
-
-          <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-            <a
-              href="https://nextjs.org/docs"
-              className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-            >
-              <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-              <p className="mt-4 text-xl">Find in-depth information about Next.js features and API.</p>
-            </a>
-
-            <a
-              href="https://nextjs.org/learn"
-              className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-            >
-              <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-              <p className="mt-4 text-xl">Learn about Next.js in an interactive course with quizzes!</p>
-            </a>
-
-            <a
-              href="https://github.com/vercel/next.js/tree/master/examples"
-              className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-            >
-              <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-              <p className="mt-4 text-xl">Discover and deploy boilerplate example Next.js projects.</p>
-            </a>
-
-            <a
-              href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-            >
-              <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-              <p className="mt-4 text-xl">Instantly deploy your Next.js site to a public URL with Vercel.</p>
-            </a>
+      <Navbar />
+      <div className={style['home-wrapper']}>
+        <div className={style['home-content']}>
+          <div className={style['container-content']}>
+            <div className="w-full md:w-1/2 flex flex-col">
+              <p className={authStyle['text-banner']}>Explore and Travel</p>
+              <p className={style['search-label']}>Vehicle Finder</p>
+              <hr className="w-10 border mt-1" />
+              <div className="w-full input-from flex-row flex gap-6 mt-10">
+                <div className="w-full md:w-1/2 flex flex-col flex-wrap">
+                  <SelectOption
+                    type="select"
+                    styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
+                    styleOption="!text-white !bg-white !opacity-40"
+                    options={location}
+                  />
+                  <SelectOption
+                    type="select"
+                    styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
+                    styleOption="!text-white !bg-white !opacity-40"
+                    options={payment}
+                  />
+                </div>
+                <div className="w-full md:w-1/2 flex flex-col flex-wrap">
+                  <SelectOption
+                    type="select"
+                    styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
+                    styleOption="!text-white !bg-white !opacity-40"
+                    options={type}
+                  />
+                  <SelectOption
+                    type="select"
+                    styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
+                    styleOption="!text-white !bg-white !opacity-40"
+                    options={[{ value: '', label: 'Date' }]}
+                  />
+                </div>
+              </div>
+              <button className="btn-primary p-3 rounded-lg text-xl font-bold mt-3 w-full md:w-2/5">Explore</button>
+            </div>
           </div>
-        </main>
-
-        <footer className="flex items-center justify-center w-full h-24 border-t">
-          <a
-            className="flex items-center justify-center"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-          </a>
-        </footer>
+        </div>
       </div>
+      <section id="populer-in-town" className="container mt-16">
+        <div className="flex flex-row flex-wrap w-full justify-between">
+          <p className="font-Playfair_Display font-bold text-2xl md:text-4xl w-1/2">Popular in town</p>
+          <div className="flex flex-row w-1/2 justify-end items-center gap-2">
+            <p className="font-Nunito text-orange text-base">View all</p>
+            <img className="h-3 w-2" src="/assets/icon/right-arrow-orange.png" alt="arrow" />
+          </div>
+        </div>
+        <CardTemplate>
+          <CardContainer>
+            <CardImgOverlay src="/assets/img/populer/1.png" />
+            <CardTextOverlay>
+              <p className="truncate font-semibold text-base">Merapi</p>
+              <p className="truncate text-grey-1">Yogyakarta</p>
+            </CardTextOverlay>
+          </CardContainer>
+          <CardContainer>
+            <CardImgOverlay src="/assets/img/populer/2.png" />
+            <CardTextOverlay>
+              <p className="truncate font-semibold text-base">Merapi</p>
+              <p className="truncate text-grey-1">Yogyakarta</p>
+            </CardTextOverlay>
+          </CardContainer>
+          <CardContainer>
+            <CardImgOverlay src="/assets/img/populer/3.png" />
+            <CardTextOverlay>
+              <p className="truncate font-semibold text-base">Merapi</p>
+              <p className="truncate text-grey-1">Yogyakarta</p>
+            </CardTextOverlay>
+          </CardContainer>
+          <CardContainer>
+            <CardImgOverlay src="/assets/img/populer/4.png" />
+            <CardTextOverlay>
+              <p className="truncate font-semibold text-base">Merapi</p>
+              <p className="truncate text-grey-1">Yogyakarta</p>
+            </CardTextOverlay>
+          </CardContainer>
+          <CardContainer>
+            <CardImgOverlay src="/assets/img/populer/1.png" />
+            <CardTextOverlay>
+              <p className="truncate font-semibold text-base">Merapi</p>
+              <p className="truncate text-grey-1">Yogyakarta</p>
+            </CardTextOverlay>
+          </CardContainer>
+        </CardTemplate>
+      </section>
+      <section id="testimonials" className="container mt-16">
+        <div className="flex flex-row flex-wrap w-full justify-between">
+          <p className="font-Playfair_Display font-bold text-4xl w-1/2">Testimonials</p>
+        </div>
+        <TestimonialsTemplate></TestimonialsTemplate>
+      </section>
+      <Footer />
     </>
   );
 }

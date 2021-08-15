@@ -1,0 +1,15 @@
+.card-template {
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 grid-flow-row mt-10 place-items-stretch;
+}
+
+.card {
+  @apply w-full flex flex-col flex-wrap relative;
+}
+
+.card-img-overlay {
+  @apply bg-cover bg-center bg-no-repeat rounded-xl h-full w-full;
+}
+
+.card-text-overlay {
+  @apply absolute bg-white rounded-r-md rounded-b-none bottom-0 -left-0 w-3/4 lg:w-1/2 pt-2 font-Nunito;
+}
