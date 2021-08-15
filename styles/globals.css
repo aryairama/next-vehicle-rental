@@ -19,3 +19,7 @@
 .content {
   min-height: 100vh;
 }
+
+p{
+  @apply break-words;
+}
