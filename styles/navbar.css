@@ -11,7 +11,9 @@
 }
 
 .navbar-menu-right {
-  @apply md:w-9/12 w-full hidden md:flex md:flex-row md:flex-wrap md:justify-end;
+  transition: opacity 400ms, height 150ms ease-in-out;
+  @apply w-full md:w-9/12 opacity-0 md:opacity-100 h-0 md:h-auto block md:flex md:flex-row md:flex-wrap md:justify-end;
+  @apply md:transition-none;
 }
 
 .navbar-menu {
@@ -50,7 +52,7 @@
 }
 
 .btn-primary {
-  @apply text-secondary bg-primary
+  @apply text-secondary bg-primary;
 }
 
 .btn-secondary {
@@ -58,11 +60,13 @@
 }
 
 .btn-white {
-  @apply text-secondary bg-white
+  @apply text-secondary bg-white;
 }
 
 .navbar-menu-right.show-navbar {
-  @apply block md:border-0 md:mt-0 border-t mt-2;
+  transition: opacity 400ms, height 400ms ease-in-out;
+  @apply opacity-100 h-full md:border-0 md:mt-0 border-t mt-2;
+  @apply md:transition-none;
 }
 
 @media (min-width: 768px) {

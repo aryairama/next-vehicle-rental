@@ -3,18 +3,7 @@ import { InputSearch } from '../../components/base';
 const index = () => {
   return (
     <>
-      <Navbar
-        menu={
-          <>
-            <li class="li-menu">
-              <img className=" h-6 w-8" src="/assets/icon/mail.png" alt="" />
-            </li>
-            <li className="li-menu">
-              <img className="rounded-full h-8 w-8" src="/assets/img/profile/1.png" alt="" />
-            </li>
-          </>
-        }
-      />
+      <Navbar auth={true} />
       <section id="search" className="mt-margin-navbar-1 container">
         <InputSearch placeholder="Search vehicle (ex, cars, cars name)" />
       </section>

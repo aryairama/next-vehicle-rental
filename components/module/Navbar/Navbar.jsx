@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import logo from '../../../public/assets/icon/logo.png';
 import listIcon from '../../../public/assets/icon/list.svg';
 import { useState } from 'react';
+import { Dropdown, DropdownItem } from '../../base';
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
   const router = useRouter();
@@ -67,6 +68,29 @@ const Navbar = (props) => {
                 ''
               )}
               {props.menu}
+              {props.auth && (
+                <>
+                  <li className="li-menu">
+                    <img className=" h-6 w-8" src="/assets/icon/mail.png" alt="" />
+                  </li>
+                  <li className="li-menu">
+                    <Dropdown type="img" src="/assets/img/profile/1.png" styleImg="rounded-full h-8 w-8">
+                      <DropdownItem>
+                        <p className="text-sm font-bold mr-6">Edit Profile</p>
+                        <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
+                      </DropdownItem>
+                      <DropdownItem>
+                        <p className="text-sm font-bold mr-6">Help</p>
+                        <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
+                      </DropdownItem>
+                      <DropdownItem>
+                        <p className="text-sm font-bold mr-6">Logout</p>
+                        <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
+                      </DropdownItem>
+                    </Dropdown>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

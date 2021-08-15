@@ -1,0 +1,24 @@
+.dropdown-container {
+  @apply relative inline-block;
+}
+
+.dropdwon {
+  @apply hidden left-0 absolute bg-white z-50 shadow-inner rounded-md border;
+}
+@media screen(md) {
+  .dropdwon {
+    @apply right-0 left-auto;
+  }
+}
+
+.dropdwon-item {
+  @apply inline-flex flex-row justify-between items-center pl-8 pr-10 py-3 border-b whitespace-nowrap w-full;
+}
+
+.dropdwon-item:hover {
+  @apply bg-gray-300;
+}
+
+.dropdown-container:hover > .dropdwon {
+  @apply block;
+}
