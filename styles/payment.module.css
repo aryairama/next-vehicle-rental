@@ -1,0 +1,68 @@
+.template-payment,
+.template-order-details {
+  @apply grid grid-cols-1 md:grid-cols-12 grid-flow-row gap-12;
+}
+
+.template-order-details {
+  @apply gap-0 md:gap-12;
+}
+
+.description-payment {
+  @apply col-span-12 md:col-span-7;
+}
+
+.preview-img {
+  @apply col-span-12 md:col-span-5;
+}
+
+.title-vehicle {
+  @apply font-Playfair_Display text-4xl md:text-5xl font-bold;
+}
+
+.vehicle-location {
+  @apply font-Playfair_Display text-2xl text-grey-1 mt-2;
+}
+
+.text-prepayment {
+  @apply font-Nunito text-xl mt-2 text-red-700 font-light;
+}
+
+.text-booking-code {
+  @apply font-Playfair_Display text-2xl text-gray-700 mt-3 font-bold;
+}
+
+.btn-copy-booking-code {
+  @apply mt-8 py-1 px-2 rounded-lg font-bold;
+}
+
+.detail-order-section-1 {
+  @apply col-span-12 md:col-span-5;
+}
+
+.detail-order-section-2 {
+  @apply col-span-12 md:col-span-7;
+}
+
+.quantity,
+.order-details,
+.reservation-date,
+.identity {
+  @apply py-5 pl-5 border border-grey-1 rounded-lg font-bold font-Nunito text-lg mb-5;
+}
+
+.order-details > ul > li,
+.identity > ul > li {
+  @apply font-light;
+}
+
+.subtotal {
+  @apply mt-5;
+}
+
+.reservation-date {
+  @apply flex flex-row w-full;
+}
+
+.text-date {
+  @apply font-light;
+}

@@ -7,7 +7,7 @@ const Dropdown = (props) => {
           <button type="button" className={props.styleButton}>
             {props.text}
           </button>
-          <ul className={style.dropdwon}>{props.children}</ul>
+          <ul className={`${style.dropdwon} ${props.styleDropdown}`}>{props.children}</ul>
         </div>
       )}
       {props.type === 'img' && (
@@ -15,7 +15,7 @@ const Dropdown = (props) => {
           <img src={props.src} className={props.styleImg}>
             {props.text}
           </img>
-          <ul className={style.dropdwon}>{props.children}</ul>
+          <ul className={`${style.dropdwon} ${props.styleDropdown}`}>{props.children}</ul>
         </div>
       )}
     </>

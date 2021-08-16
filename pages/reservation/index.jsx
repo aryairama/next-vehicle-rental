@@ -54,7 +54,7 @@ const Reservation = () => {
         <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
           <button
             className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold"
-            onClick={() => router.push('/reservation')}
+            onClick={() => router.push('/payment')}
           >
             Pay now : Rp. 178.000
           </button>
