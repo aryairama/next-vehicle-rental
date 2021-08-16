@@ -10,7 +10,7 @@ const VehicleDetail = () => {
     <>
       <Navbar auth={true} />
       <section className="mt-margin-navbar-1 mb-16 container">
-        <div className="w-full flex flex-row mb-14" onClick={() => router.back()}>
+        <div className="w-full flex flex-row mb-14 cursor-pointer" onClick={() => router.back()}>
           <img className="h-8 w-5" src="/assets/icon/black-arrow-back.png" alt="arrow-back" />
           <p className="text-2xl font-bold ml-8 font-Nunito">Detail</p>
         </div>
@@ -32,14 +32,19 @@ const VehicleDetail = () => {
             <p className="text-grey-1 mt-3">Capacity : 1 person </p>
             <p className="text-grey-1">Type : Bike </p>
             <p className="text-grey-1">Reservation before 2 PM</p>
-            <p className="font-Playfair_Display text-2xl md:text-3xl font-bold text-right">Rp.78.000/day</p>
+            <p className="font-Playfair_Display text-2xl md:text-3xl font-bold mt-6">Rp.78.000/day</p>
             <InputCount value={count} styleContainer="w-full sm:w-1/2" />
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
           <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold">Chat Admin</button>
-          <button className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold">Reservation</button>
-          <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold flex items-center">
+          <button
+            className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold"
+            onClick={() => router.push('/reservation')}
+          >
+            Reservation
+          </button>
+          <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold flex items-center justify-center">
             <img src="/assets/icon/love.png" className="h-8 mr-5" alt="icon-love" />
             <p>Like</p>
           </button>
