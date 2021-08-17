@@ -64,6 +64,10 @@
   @apply text-secondary bg-white;
 }
 
+.btn-gray {
+  @apply text-secondary bg-gray-200;
+}
+
 .navbar-menu-right.show-navbar {
   transition: opacity 400ms, height 400ms ease-in-out;
   @apply opacity-100 h-full md:border-0 md:mt-0 border-t mt-2;

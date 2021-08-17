@@ -1,0 +1,59 @@
+.select {
+  @apply appearance-none w-full bg-whitetransparant text-white px-10 py-4 rounded-lg text-lg md:text-2xl outline-none placeholder-white;
+}
+
+.option {
+  @apply bg-secondary p-0 m-0;
+}
+
+.input-search {
+  @apply border border-gray-300 rounded-md py-2 w-full outline-none pl-8 pr-12;
+}
+
+.input-search:focus {
+  @apply border-primary transition-all ease-in-out duration-500 font-Nunito text-secondary;
+}
+
+.input-search:focus ~ img {
+  transition: all 500ms ease-in-out;
+  filter: invert(69%) sepia(88%) saturate(277%) hue-rotate(354deg) brightness(102%) contrast(102%);
+}
+
+.inline-layout-radio {
+  @apply flex flex-row flex-wrap;
+}
+
+.block-layout-radio {
+  @apply flex flex-col flex-wrap;
+}
+
+.input-check-container {
+  @apply flex flex-row flex-wrap items-center;
+}
+
+.input-check {
+  @apply mr-3 appearance-none w-4 h-4 mt-1 align-top bg-white checked:bg-primary checked:border-black;
+  @apply bg-no-repeat bg-center bg-contain border-2 border-grey-1;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
+}
+
+.input-check[type='checkbox'] {
+  @apply rounded-sm;
+}
+
+.input-check[type='radio'] {
+  @apply rounded-full;
+}
+
+.label {
+  @apply text-grey-1;
+}
+
+.input-check:checked ~ .label {
+  @apply text-brown font-bold;
+}
+
+.input {
+  @apply w-full text-black text-base border-b focus:border-primary transition-colors ease-in-out duration-500 border-grey-1 py-2 outline-none placeholder-secondary;
+}

@@ -4,3 +4,6 @@ export { default as InputSearch } from './Input/InputSearch';
 export { default as Dropdown } from './Dropdown/Dropdown';
 export { default as DropdownItem } from './Dropdown/DropdownItem';
 export { default as InputCount } from './InputCount/InputCount';
+export { default as LayoutInput } from './Input/LayoutInput';
+export { default as InputCheck } from './Input/InputCheck';
+export { default as Input } from './Input/Input';

@@ -76,7 +76,9 @@ const Navbar = (props) => {
                   <li className="li-menu">
                     <Dropdown type="img" src="/assets/img/profile/1.png" styleImg="rounded-full h-8 w-8">
                       <DropdownItem>
-                        <p className="text-sm font-bold mr-6">Edit Profile</p>
+                        <Link href="/profile">
+                          <a className="text-sm font-bold mr-6">Edit Profile</a>
+                        </Link>
                         <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
                       </DropdownItem>
                       <DropdownItem>
@@ -98,5 +100,5 @@ const Navbar = (props) => {
     </>
   );
 };
-
+<DropdownItem></DropdownItem>;
 export default Navbar;

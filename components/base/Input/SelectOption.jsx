@@ -1,4 +1,4 @@
-import style from './Input.module.css';
+import style from './InputAll.module.css';
 const SelectOption = (props) => {
   return (
     <div className={`mb-6 relative ${props.styleContainer}`}>
