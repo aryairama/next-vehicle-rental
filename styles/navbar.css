@@ -17,7 +17,7 @@
 }
 
 .navbar-menu {
-  @apply block md:flex flex-row flex-wrap items-center;
+  @apply block md:flex flex-row flex-wrap items-center md:mt-0 -mt-96;
 }
 
 .li-menu {
@@ -67,6 +67,10 @@
   transition: opacity 400ms, height 400ms ease-in-out;
   @apply opacity-100 h-full md:border-0 md:mt-0 border-t mt-2;
   @apply md:transition-none;
+}
+
+.navbar-menu-right.show-navbar > .navbar-menu {
+  @apply mt-0;
 }
 
 @media (min-width: 768px) {

@@ -1,6 +1,3 @@
 {
-  "extends": "next/core-web-vitals",
-  "css.lint.unknownAtRules": "ignore",
-  "css.validate": true,
-  "scss.validate": true,
+  "extends": "next/core-web-vitals"
 }

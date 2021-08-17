@@ -154,7 +154,7 @@ export default function Home() {
       </section>
       <section id="testimonials" className="container mt-16">
         <div className="flex flex-row flex-wrap w-full justify-between">
-          <p className="font-Playfair_Display font-bold text-4xl w-1/2">Testimonials</p>
+          <p className="font-Playfair_Display font-bold text-2xl md:text-4xl">Testimonials</p>
         </div>
         <TestimonialsTemplate></TestimonialsTemplate>
       </section>
