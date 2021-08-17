@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Navbar, Footer } from '../../components/module';
 import { InputCount } from '../../components/base';
 import { useRouter } from 'next/router';
@@ -16,7 +17,11 @@ const VehicleDetail = () => {
         </div>
         <div className={style['template-description']}>
           <div className="preview-img">
-            <img className="rounded-xl" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
+            <img
+              className="rounded-xl h-96 w-full bg-contain"
+              src="/assets/img/bikes/5.jpg"
+              alt="preview-vehicle"
+            />
             <div className={style['vehicle-gallery']}>
               <img className="rounded-md w-40 h-20 mx-2" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
               <img className="rounded-md w-40 h-20 mx-2" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />

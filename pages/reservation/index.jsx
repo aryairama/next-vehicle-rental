@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Navbar, Footer } from '../../components/module';
 import { InputCount, SelectOption, InputAuth } from '../../components/base';
 import { useRouter } from 'next/router';
@@ -25,7 +26,7 @@ const Reservation = () => {
         </div>
         <div className={style['template-description']}>
           <div className="preview-img">
-            <img className="rounded-xl" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
+            <img className="rounded-xl h-96 w-full bg-contain" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
           </div>
           <div className="description-product">
             <p className="font-Playfair_Display text-4xl md:text-5xl font-bold">Fixie - Gray Only lorem</p>

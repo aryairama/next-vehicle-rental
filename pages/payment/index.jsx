@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Navbar, Footer } from '../../components/module';
 import { SelectOption } from '../../components/base';
 import { useRouter } from 'next/router';
@@ -22,7 +23,7 @@ const Payment = () => {
         </div>
         <div className={style['template-payment']}>
           <div className={style['preview-img']}>
-            <img className="rounded-xl" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
+            <img className="rounded-xl h-96 w-full bg-contain" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
           </div>
           <div className={style['description-payment']}>
             <p className={style['title-vehicle']}>Fixie - Gray Only lorem</p>
