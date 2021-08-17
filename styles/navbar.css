@@ -11,12 +11,13 @@
 }
 
 .navbar-menu-right {
-  transition: opacity 400ms, height 150ms ease-in-out;
+  transition: opacity 400ms, height 400ms ease-in-out;
   @apply w-full md:w-9/12 opacity-0 md:opacity-100 h-0 md:h-auto block md:flex md:flex-row md:flex-wrap md:justify-end;
   @apply md:transition-none;
 }
 
 .navbar-menu {
+  transition: margin-top 400ms ease-in-out;
   @apply block md:flex flex-row flex-wrap items-center md:mt-0 -mt-96;
 }
 
@@ -70,6 +71,7 @@
 }
 
 .navbar-menu-right.show-navbar > .navbar-menu {
+  transition: margin-top 400ms ease-in-out;
   @apply mt-0;
 }
 
