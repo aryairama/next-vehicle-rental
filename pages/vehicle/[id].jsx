@@ -27,7 +27,7 @@ const VehicleDetail = (props) => {
               {props?.vehicle?.vehicle_images?.map((previewImg, index) => (
                 <img
                   key={index}
-                  className="rounded-md w-40 h-20 mx-2"
+                  className="rounded-md w-40 h-20 mx-2 object-contain"
                   onClick={() => setShowImgGallery(previewImg.vehicle_image)}
                   src={`${process.env.NEXT_PUBLIC_API_URL}/${previewImg.vehicle_image}`}
                   alt="preview-vehicle"
@@ -47,7 +47,7 @@ const VehicleDetail = (props) => {
             <InputCount value={count} styleContainer="w-full sm:w-1/2" />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
+        {/* <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
           <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold">Chat Admin</button>
           <button
             className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold"
@@ -59,6 +59,17 @@ const VehicleDetail = (props) => {
             <img src="/assets/icon/love.png" className="h-8 mr-5" alt="icon-love" />
             <p>Like</p>
           </button>
+        </div> */}
+        <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
+          <button className="btn-secondary w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold">
+            Add to home page
+          </button>
+          <button
+            className="btn-primary w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold"
+            onClick={() => router.push(`/vehicle/update/${router.query.id}`)}
+          >
+            Edit item
+          </button>
         </div>
       </section>
       <Footer />
@@ -69,8 +80,12 @@ const VehicleDetail = (props) => {
 export async function getServerSideProps(context) {
   const vehicle = await (
     await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/${context.params.id}`)).json()
-  ).data;
-
+  )?.data;
+  if (!vehicle) {
+    return {
+      notFound: true,
+    };
+  }
   return {
     props: { vehicle },
   };
