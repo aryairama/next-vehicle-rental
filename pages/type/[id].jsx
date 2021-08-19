@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Navbar, Footer, CardTemplate, CardContainer, CardImgOverlay, CardTextOverlay } from '../../components/module';
 import { InputSearch, buttonItemRender, localePagination } from '../../components/base';
@@ -11,12 +12,15 @@ const VehicleByType = (props) => {
   const { id } = router.query;
   const [page, setPage] = useState(1);
   const [vehicles, setVehicles] = useState(props.vehicles);
+  const [order, setOrder] = useState(false);
   useEffect(async () => {
     const updateVehicles = await (
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/type/${id}?page=${page}&limit=20`)
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/vehicles/type/${id}?page=${page}&limit=20&order=${order ? 'ASC' : 'DESC'}`
+      )
     ).json();
     setVehicles(updateVehicles);
-  }, [page]);
+  }, [page,order]);
   return (
     <>
       <Navbar
@@ -29,7 +33,15 @@ const VehicleByType = (props) => {
       />
       <section id="cars" className="container mt-margin-navbar-1 mb-16">
         <div className="flex flex-col flex-wrap w-full">
-          <p className="font-Playfair_Display font-bold text-2xl md:text-4xl">{props?.type?.type_name}</p>
+          <p className="font-Playfair_Display font-bold text-2xl md:text-4xl flex">
+            {props?.type?.type_name}{' '}
+            <img
+              onClick={() => setOrder(!order)}
+              className="ml-4"
+              src={order ? '/assets/icon/sort-up.svg' : '/assets/icon/sort-down.svg'}
+              alt="sort"
+            />
+          </p>
           <p className="font-Nunito text-grey-1 text-center text-2xl">Click item to see details and reservation</p>
         </div>
         <CardTemplate>

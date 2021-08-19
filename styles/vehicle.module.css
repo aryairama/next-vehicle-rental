@@ -1,5 +1,5 @@
 .vehicle-gallery {
-  @apply flex flex-row flex-nowrap overflow-x-scroll mt-4 cursor-pointer;
+  @apply flex flex-row flex-nowrap overflow-x-scroll mt-10 md:mt-4 cursor-pointer;
 }
 
 .template-description {
