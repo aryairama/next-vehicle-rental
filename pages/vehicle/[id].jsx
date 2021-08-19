@@ -4,9 +4,10 @@ import { InputCount } from '../../components/base';
 import { useRouter } from 'next/router';
 import style from '../../styles/vehicle.module.css';
 import { useState } from 'react';
-const VehicleDetail = () => {
+const VehicleDetail = (props) => {
   const router = useRouter();
   const [count, setCount] = useState(1);
+  const [showImgGallery, setShowImgGallery] = useState(props.vehicle.vehicle_images[0].vehicle_image);
   return (
     <>
       <Navbar auth={true} />
@@ -18,26 +19,31 @@ const VehicleDetail = () => {
         <div className={style['template-description']}>
           <div className="preview-img">
             <img
-              className="rounded-xl h-96 w-full bg-contain"
-              src="/assets/img/bikes/5.jpg"
+              className="rounded-xl h-96 w-full object-contain"
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${showImgGallery}`}
               alt="preview-vehicle"
             />
             <div className={style['vehicle-gallery']}>
-              <img className="rounded-md w-40 h-20 mx-2" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
-              <img className="rounded-md w-40 h-20 mx-2" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
-              <img className="rounded-md w-40 h-20 mx-2" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
-              <img className="rounded-md w-40 h-20 mx-2" src="/assets/img/bikes/5.jpg" alt="preview-vehicle" />
+              {props?.vehicle?.vehicle_images?.map((previewImg, index) => (
+                <img
+                  key={index}
+                  className="rounded-md w-40 h-20 mx-2"
+                  onClick={() => setShowImgGallery(previewImg.vehicle_image)}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${previewImg.vehicle_image}`}
+                  alt="preview-vehicle"
+                />
+              ))}
             </div>
           </div>
           <div className="description-product">
-            <p className="font-Playfair_Display text-4xl md:text-5xl font-bold break-all">Fixie - Gray Only</p>
-            <p className="font-Playfair_Display text-2xl text-grey-1 mt-2">Yogyakarta</p>
-            <p className="font-Nunito text-xl mt-6 font-bold text-green-1">Available</p>
+            <p className="font-Playfair_Display text-4xl md:text-5xl font-bold break-all">
+              {props?.vehicle?.vehicles_name}
+            </p>
+            <p className="font-Playfair_Display text-2xl text-grey-1 mt-2">{props?.vehicle?.location_name}</p>
+            <p className="font-Nunito text-xl mt-6 font-bold text-green-1">{props?.vehicle?.status}</p>
             <p className="font-Nunito text-xl mt-2 text-red-700 font-light">No prepayment</p>
-            <p className="text-grey-1 mt-3">Capacity : 1 person </p>
-            <p className="text-grey-1">Type : Bike </p>
-            <p className="text-grey-1">Reservation before 2 PM</p>
-            <p className="font-Playfair_Display text-2xl md:text-3xl font-bold mt-6">Rp.78.000/day</p>
+            <p className="text-grey-1 mt-3">{props?.vehicle?.description} </p>
+            <p className="font-Playfair_Display text-2xl md:text-3xl font-bold mt-6">{`Rp.${props?.vehicle?.price}/day`}</p>
             <InputCount value={count} styleContainer="w-full sm:w-1/2" />
           </div>
         </div>
@@ -59,5 +65,15 @@ const VehicleDetail = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  const vehicle = await (
+    await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/${context.params.id}`)).json()
+  ).data;
+
+  return {
+    props: { vehicle },
+  };
+}
 
 export default VehicleDetail;
