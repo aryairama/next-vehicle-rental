@@ -7,60 +7,22 @@ import {
   CardTemplate,
   TestimonialsTemplate,
 } from '../components/module';
+import { useRouter } from 'next/router';
 import { SelectOption } from '../components/base';
 import style from '../styles/home.module.css';
 import authStyle from '../styles/auth.module.css';
-export default function Home() {
-  const location = [
-    {
-      value: '',
-      label: 'Location',
-    },
-    {
-      value: 'jakarta',
-      label: 'Jakarta',
-    },
-    {
-      value: 'malang',
-      label: 'Malang',
-    },
-    {
-      value: 'yogyakarta',
-      label: 'Yogyakarta',
-    },
-  ];
-  const type = [
-    {
-      value: '',
-      label: 'Type',
-    },
-    {
-      value: 'bike',
-      label: 'Bike',
-    },
-    {
-      value: 'cars',
-      label: 'Cars',
-    },
-    {
-      value: 'motorbike',
-      label: 'Motorbike',
-    },
-  ];
-  const payment = [
-    {
-      value: '',
-      label: 'Payment',
-    },
-    {
-      value: 'cash',
-      label: 'Cash',
-    },
-    {
-      value: 'transfer',
-      label: 'Transfer',
-    },
-  ];
+import { useState } from 'react';
+export default function Home(props) {
+  const router = useRouter();
+  const [search, setSearch] = useState({
+    location: '',
+    type: '',
+  });
+  const onSearchHandler = (e) => {
+    setSearch((oldValue) => {
+      return { ...oldValue, [e.target.name]: e.target.value };
+    });
+  };
   return (
     <>
       <Navbar />
@@ -74,34 +36,47 @@ export default function Home() {
               <div className="w-full input-from flex-row flex gap-6 mt-10">
                 <div className="w-full md:w-1/2 flex flex-col flex-wrap">
                   <SelectOption
+                    name="location"
+                    value={search.location}
+                    onChange={onSearchHandler}
                     type="select"
                     styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
                     styleOption="!text-white !bg-white !opacity-40"
-                    options={location}
-                  />
-                  <SelectOption
-                    type="select"
-                    styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
-                    styleOption="!text-white !bg-white !opacity-40"
-                    options={payment}
+                    options={[
+                      {
+                        value: '',
+                        label: 'Location',
+                      },
+                      ...props.locations,
+                    ]}
                   />
                 </div>
                 <div className="w-full md:w-1/2 flex flex-col flex-wrap">
                   <SelectOption
+                    name="type"
+                    value={search.type}
+                    onChange={onSearchHandler}
                     type="select"
                     styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
                     styleOption="!text-white !bg-white !opacity-40"
-                    options={type}
-                  />
-                  <SelectOption
-                    type="select"
-                    styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
-                    styleOption="!text-white !bg-white !opacity-40"
-                    options={[{ value: '', label: 'Date' }]}
+                    options={[
+                      {
+                        value: '',
+                        label: 'Type',
+                      },
+                      ...props.types,
+                    ]}
                   />
                 </div>
               </div>
-              <button className="btn-primary p-3 rounded-lg text-xl font-bold mt-3 w-full md:w-2/5">Explore</button>
+              <button
+                onClick={() =>
+                  router.push({ pathname: '/search', query: { location: search.location, type: search.type } })
+                }
+                className="btn-primary p-3 rounded-lg text-xl font-bold mt-3 w-full md:w-2/5"
+              >
+                Explore
+              </button>
             </div>
           </div>
         </div>
@@ -161,4 +136,26 @@ export default function Home() {
       <Footer />
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  let locations = await (
+    await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
+  ).data;
+  locations = locations.map((location) => {
+    return {
+      label: location.location_name,
+      value: location.location_name,
+    };
+  });
+  let types = await (await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)).json()).data;
+  types = types.map((type) => {
+    return {
+      label: type.type_name,
+      value: type.type_name,
+    };
+  });
+  return {
+    props: { locations, types },
+  };
 }
