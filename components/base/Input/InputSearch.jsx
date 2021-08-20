@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 const InputSearch = (props) => {
   const router = useRouter();
-  const [search, setSeach] = useState(router.query.search);
+  const [search, setSeach] = useState(router.query.search || '');
   return (
     <div className={`relative ${props.styleContainer}`}>
       {props.query === false && (
