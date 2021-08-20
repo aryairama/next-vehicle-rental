@@ -29,7 +29,13 @@ const Search = (props) => {
     <>
       <Navbar auth={true} />
       <section id="search" className="mt-margin-navbar-1 container">
-        <InputSearch placeholder="Search vehicle (ex, cars, cars name)" />
+        <InputSearch
+          query={true}
+          placeholder="Search vehicle (ex, cars, cars name)"
+          name="search"
+          value={router.query.search}
+          onChange={onSearchHandler}
+        />
         <div className="flex flex-row flex-wrap w-full">
           <SelectOption
             name="location"
