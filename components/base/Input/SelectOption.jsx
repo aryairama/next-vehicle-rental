@@ -22,7 +22,7 @@ const SelectOption = (props) => {
           </option>
         ))}
       </select>
-      <img className="absolute right-6 top-6 h-2" src="/assets/icon/arrow-down.png" alt="" />
+      <img className={`absolute right-6 top-6 h-2 ${props.styleArrow}`} src="/assets/icon/arrow-down.png" alt="" />
       {props.children}
     </div>
   );

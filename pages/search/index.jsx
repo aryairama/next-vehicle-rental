@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Navbar, Footer, CardContainer, CardImgOverlay, CardTemplate, CardTextOverlay } from '../../components/module';
-import { InputSearch, buttonItemRender, localePagination } from '../../components/base';
+import { InputSearch, buttonItemRender, localePagination, SelectOption } from '../../components/base';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Pagination from 'rc-pagination';
@@ -10,6 +10,11 @@ const Search = (props) => {
   const [vehicles, setVehicles] = useState({ ...props.vehicles });
   const [page, setPage] = useState(1);
   const [order, setOrder] = useState(false);
+  const onSearchHandler = (e) => {
+    router.push({ pathname: '/search', query: { ...router.query, [e.target.name]: e.target.value } }, undefined, {
+      shallow: true,
+    });
+  };
   useEffect(async () => {
     const vehicles = await (
       await fetch(
@@ -19,12 +24,48 @@ const Search = (props) => {
       )
     ).json();
     setVehicles({ ...vehicles });
-  }, [router.query?.search, page, order]);
+  }, [router.query?.search, router.query?.type, router.query?.location, page, order]);
   return (
     <>
       <Navbar auth={true} />
       <section id="search" className="mt-margin-navbar-1 container">
         <InputSearch placeholder="Search vehicle (ex, cars, cars name)" />
+        <div className="flex flex-row flex-wrap w-full">
+          <SelectOption
+            name="location"
+            value={router.query.location}
+            onChange={onSearchHandler}
+            type="select"
+            styleArrow="!top-5"
+            styleContainer="!w-1/4 !my-2 mr-2"
+            styleInput="!text-black-1 !text-base !bg-white !pl-7 !py-2 border border-gray-300"
+            styleOption="!text-white !bg-white"
+            options={[
+              {
+                value: '',
+                label: 'Location',
+              },
+              ...props.locations,
+            ]}
+          />
+          <SelectOption
+            name="type"
+            value={router.query.type}
+            onChange={onSearchHandler}
+            type="select"
+            styleArrow="!top-5"
+            styleContainer="!w-1/4 !my-2"
+            styleInput="!text-black-1 !text-base !bg-white !pl-7 !py-2 border border-gray-300"
+            styleOption="!text-white !bg-white"
+            options={[
+              {
+                value: '',
+                label: 'Type',
+              },
+              ...props.types,
+            ]}
+          />
+        </div>
       </section>
       <section id="populer-in-town" className="container my-16">
         <div className="flex flex-row flex-wrap w-full justify-between">
@@ -71,6 +112,22 @@ const Search = (props) => {
 };
 
 export async function getServerSideProps({ query }) {
+  let locations = await (
+    await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
+  ).data;
+  locations = locations.map((location) => {
+    return {
+      label: location.location_name,
+      value: location.location_name,
+    };
+  });
+  let types = await (await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)).json()).data;
+  types = types.map((type) => {
+    return {
+      label: type.type_name,
+      value: type.type_name,
+    };
+  });
   const vehicles = await (
     await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/vehicles?search=${query.search || ''}&type_name=${
@@ -79,7 +136,7 @@ export async function getServerSideProps({ query }) {
     )
   ).json();
   return {
-    props: { vehicles },
+    props: { vehicles, locations, types },
   };
 }
 
