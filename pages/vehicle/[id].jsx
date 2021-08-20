@@ -61,11 +61,11 @@ const VehicleDetail = (props) => {
           </button>
         </div> */}
         <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
-          <button className="btn-secondary w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold">
+          <button className="btn-secondary w-full md:w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold">
             Add to home page
           </button>
           <button
-            className="btn-primary w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold"
+            className="btn-primary w-full md:w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold"
             onClick={() => router.push(`/vehicle/update/${router.query.id}`)}
           >
             Edit item
