@@ -4,12 +4,12 @@
 }
 
 .auth-wrapper {
-  background: url(/assets/img/auth1.png);
+  background: url("/assets/img/auth1.png");
   @apply bg-cover bg-center bg-no-repeat;
 }
 
 .auth-wrapper2 {
-  background: url(/assets/img/auth2.png);
+  background: url("/assets/img/auth2.png");
   @apply bg-cover bg-center bg-no-repeat;
 }
 .auth-content {

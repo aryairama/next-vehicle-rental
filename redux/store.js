@@ -7,7 +7,8 @@ import { persistReducer } from 'redux-persist';
 import { CookieStorage } from 'redux-persist-cookie-storage';
 import Cookies from 'js-cookie';
 const persistConfig = {
-  key: 'vehiclerental',
+  key: 'vehicle-rental',
+  keyPrefix: '',
   timeout: 100,
   storage: new CookieStorage(Cookies, {
     setCookieOptions: {
