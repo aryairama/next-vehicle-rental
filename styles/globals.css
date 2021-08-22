@@ -3,23 +3,27 @@
 @tailwind utilities;
 @font-face {
   font-family: Playfair_Display;
-  src: url("/assets/font/Playfair_Display/static/PlayfairDisplay-Regular.ttf");
+  src: url('/assets/font/Playfair_Display/static/PlayfairDisplay-Regular.ttf');
 }
 
 @font-face {
   font-family: Nunito;
-  src: url("/assets/font/Nunito/Nunito-Regular.ttf");
+  src: url('/assets/font/Nunito/Nunito-Regular.ttf');
 }
 
 @font-face {
   font-family: Mulish;
-  src: url("/assets/font/Mulish/static/Mulish-Regular.ttf");
+  src: url('/assets/font/Mulish/static/Mulish-Regular.ttf');
 }
 
 .content {
   min-height: 100vh;
 }
 
-p{
+p {
   @apply break-words;
+}
+
+.swal-footer {
+  @apply text-center;
 }

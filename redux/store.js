@@ -7,7 +7,7 @@ import { persistReducer } from 'redux-persist';
 import { CookieStorage } from 'redux-persist-cookie-storage';
 import Cookies from 'js-cookie';
 const persistConfig = {
-  key: 'vehicle-rental',
+  key: 'vehicleRental',
   keyPrefix: '',
   timeout: 100,
   storage: new CookieStorage(Cookies, {
@@ -16,10 +16,11 @@ const persistConfig = {
       secure: true,
     },
   }),
+  whitelist: ['user', 'reservation'],
 };
 
 let store;
-const persistedReducer = persistReducer(persistConfig, rootReducers);
+export const persistedReducer = persistReducer(persistConfig, rootReducers);
 function initStore(initialState = {}) {
   if (process.env.NODE_ENV !== 'production') {
     return createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)));

@@ -6,7 +6,10 @@ import logo from '../../../public/assets/icon/logo.png';
 import listIcon from '../../../public/assets/icon/list.svg';
 import { useState } from 'react';
 import { Dropdown, DropdownItem } from '../../base';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../redux/action/userAction';
 const Navbar = (props) => {
+  const dispatch = useDispatch()
   const [show, setShow] = useState(false);
   const router = useRouter();
   const formatUrl = ([first, ...last]) => {
@@ -22,11 +25,11 @@ const Navbar = (props) => {
       <div className="navbar">
         <div className="navbar-container container">
           <div className="navbar-menu-left">
-            <Image src={logo} width="41px" height="41px" />
+            <Image src={logo} width="41px" height="41px" alt="icon-logo"/>
           </div>
           <div className="block md:hidden">
             <button onClick={() => setShow(!show)} className="border border-black rounded-md py-1 px-3">
-              <Image src={listIcon} />
+              <Image src={listIcon} alt="icon-list"/>
             </button>
           </div>
           <div className={`navbar-menu-right ${show ? 'show-navbar' : ''}`}>
@@ -85,7 +88,7 @@ const Navbar = (props) => {
                         <p className="text-sm font-bold mr-6">Help</p>
                         <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
                       </DropdownItem>
-                      <DropdownItem>
+                      <DropdownItem onClick={()=> dispatch(logout(router))}>
                         <p className="text-sm font-bold mr-6">Logout</p>
                         <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
                       </DropdownItem>

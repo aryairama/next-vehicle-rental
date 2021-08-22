@@ -1,11 +1,10 @@
 .home-wrapper {
   margin-top: 102.5px;
-  background: url("/assets/img/home1.png");
+  background: url('/assets/img/home1.png');
   @apply w-full bg-center bg-cover bg-no-repeat;
 }
 .home-content {
   background-color: #00000066;
-  /* @apply md:min-h-screen; */
 }
 
 .container-content {
@@ -14,6 +13,10 @@
   @apply flex flex-wrap flex-row justify-between w-full h-full container;
 }
 
-.search-label{
-    @apply font-Nunito text-xl text-white font-bold mt-8
+.text-banner {
+  @apply text-white text-4xl md:text-6xl font-Playfair_Display font-bold leading-tight;
+}
+
+.search-label {
+  @apply font-Nunito text-xl text-white font-bold mt-8;
 }

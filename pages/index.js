@@ -10,7 +10,6 @@ import {
 import { useRouter } from 'next/router';
 import { SelectOption } from '../components/base';
 import style from '../styles/home.module.css';
-import authStyle from '../styles/auth.module.css';
 import { useState } from 'react';
 export default function Home(props) {
   const router = useRouter();
@@ -30,7 +29,7 @@ export default function Home(props) {
         <div className={style['home-content']}>
           <div className={style['container-content']}>
             <div className="w-full md:w-1/2 flex flex-col">
-              <p className={authStyle['text-banner']}>Explore and Travel</p>
+              <p className={style['text-banner']}>Explore and Travel</p>
               <p className={style['search-label']}>Vehicle Finder</p>
               <hr className="w-10 border mt-1" />
               <div className="w-full input-from flex-row flex gap-6 mt-10">
@@ -139,23 +138,31 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-  let locations = await (
-    await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
-  ).data;
-  locations = locations.map((location) => {
+  try {
+    let { data: locations } = await (
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)
+    ).json();
+    locations = locations.map((location) => {
+      return {
+        label: location.location_name,
+        value: location.location_name,
+      };
+    });
+    let { data: types } = await (
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)
+    ).json();
+    types = types.map((type) => {
+      return {
+        label: type.type_name,
+        value: type.type_name,
+      };
+    });
     return {
-      label: location.location_name,
-      value: location.location_name,
+      props: { locations, types },
     };
-  });
-  let types = await (await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)).json()).data;
-  types = types.map((type) => {
+  } catch (error) {
     return {
-      label: type.type_name,
-      value: type.type_name,
+      props: { locations: [], types: [] },
     };
-  });
-  return {
-    props: { locations, types },
-  };
+  }
 }

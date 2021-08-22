@@ -2,6 +2,7 @@ import style from '../../styles/auth.module.css';
 import { InputAuth } from '../../components/base';
 import { Footer } from '../../components/module';
 import { useRouter } from 'next/router';
+import { checkAuth } from '../../components/hoc/AuthRoute';
 const SignUp = () => {
   const router = useRouter();
   return (
@@ -41,4 +42,5 @@ const SignUp = () => {
   );
 };
 
+export const getServerSideProps = checkAuth((context, redux) => ({ props: {} }));
 export default SignUp;
