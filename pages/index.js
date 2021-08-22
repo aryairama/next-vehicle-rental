@@ -11,7 +11,8 @@ import { useRouter } from 'next/router';
 import { SelectOption } from '../components/base';
 import style from '../styles/home.module.css';
 import { useState } from 'react';
-export default function Home(props) {
+import PublicRoute from '../components/hoc/PublicRoute';
+const Home = (props) => {
   const router = useRouter();
   const [search, setSearch] = useState({
     location: '',
@@ -24,7 +25,6 @@ export default function Home(props) {
   };
   return (
     <>
-      <Navbar />
       <div className={style['home-wrapper']}>
         <div className={style['home-content']}>
           <div className={style['container-content']}>
@@ -132,25 +132,22 @@ export default function Home(props) {
         </div>
         <TestimonialsTemplate></TestimonialsTemplate>
       </section>
-      <Footer />
     </>
   );
-}
+};
+
+export default PublicRoute(Home);
 
 export async function getServerSideProps(context) {
   try {
-    let { data: locations } = await (
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)
-    ).json();
+    let { data: locations } = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json();
     locations = locations.map((location) => {
       return {
         label: location.location_name,
         value: location.location_name,
       };
     });
-    let { data: types } = await (
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)
-    ).json();
+    let { data: types } = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)).json();
     types = types.map((type) => {
       return {
         label: type.type_name,

@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
+import PublicRoute from '../../components/hoc/PublicRoute';
+
 const Search = (props) => {
   const router = useRouter();
   const [vehicles, setVehicles] = useState({ ...props.vehicles });
@@ -27,7 +29,6 @@ const Search = (props) => {
   }, [router.query?.search, router.query?.type, router.query?.location, page, order]);
   return (
     <>
-      <Navbar auth={true} />
       <section id="search" className="mt-margin-navbar-1 container">
         <InputSearch
           query={true}
@@ -112,7 +113,6 @@ const Search = (props) => {
           )}
         </div>
       </section>
-      <Footer />
     </>
   );
 };
@@ -146,4 +146,4 @@ export async function getServerSideProps({ query }) {
   };
 }
 
-export default Search;
+export default PublicRoute(Search);

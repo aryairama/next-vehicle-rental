@@ -6,7 +6,7 @@ export const login = (formData, history) => async (dispatch) => {
     const { data } = await (await axios.post('/users/login', formData)).data;
     dispatch({ type: 'LOGIN', payload: data });
     swal('Success', 'Login successful', 'success');
-    history.push('/');
+    history.back()
   } catch (error) {
     swal('Failed', error?.response?.data?.message, 'error');
     console.log(error);

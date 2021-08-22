@@ -9,7 +9,7 @@ import { Dropdown, DropdownItem } from '../../base';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/action/userAction';
 const Navbar = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const router = useRouter();
   const formatUrl = ([first, ...last]) => {
@@ -25,11 +25,11 @@ const Navbar = (props) => {
       <div className="navbar">
         <div className="navbar-container container">
           <div className="navbar-menu-left">
-            <Image src={logo} width="41px" height="41px" alt="icon-logo"/>
+            <Image src={logo} width="41px" height="41px" alt="icon-logo" />
           </div>
           <div className="block md:hidden">
             <button onClick={() => setShow(!show)} className="border border-black rounded-md py-1 px-3">
-              <Image src={listIcon} alt="icon-list"/>
+              <Image src={listIcon} alt="icon-list" />
             </button>
           </div>
           <div className={`navbar-menu-right ${show ? 'show-navbar' : ''}`}>
@@ -54,7 +54,7 @@ const Navbar = (props) => {
                   About
                 </a>
               </li>
-              {router.pathname === '/' ? (
+              {props.auth === false && (
                 <>
                   <li className="li-menu">
                     <button onClick={() => router.push('/auth/login')} className="btn btn-outline-primary">
@@ -67,8 +67,6 @@ const Navbar = (props) => {
                     </button>
                   </li>
                 </>
-              ) : (
-                ''
               )}
               {props.menu}
               {props.auth && (
@@ -77,7 +75,15 @@ const Navbar = (props) => {
                     <img className=" h-6 w-8" src="/assets/icon/mail.png" alt="" />
                   </li>
                   <li className="li-menu">
-                    <Dropdown type="img" src="/assets/img/profile/1.png" styleImg="rounded-full h-8 w-8">
+                    <Dropdown
+                      type="img"
+                      src={
+                        props?.user?.profile_img
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/${props.user.profile_img}`
+                          : '/assets/img/profile/1.png'
+                      }
+                      styleImg="rounded-full h-8 w-8"
+                    >
                       <DropdownItem>
                         <Link href="/profile">
                           <a className="text-sm font-bold mr-6">Edit Profile</a>
@@ -88,7 +94,7 @@ const Navbar = (props) => {
                         <p className="text-sm font-bold mr-6">Help</p>
                         <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
                       </DropdownItem>
-                      <DropdownItem onClick={()=> dispatch(logout(router))}>
+                      <DropdownItem onClick={() => dispatch(logout(router))}>
                         <p className="text-sm font-bold mr-6">Logout</p>
                         <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
                       </DropdownItem>
@@ -103,5 +109,4 @@ const Navbar = (props) => {
     </>
   );
 };
-<DropdownItem></DropdownItem>;
 export default Navbar;

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import { useState, useEffect } from 'react';
+import PublicRoute from '../../components/hoc/PublicRoute';
 
 const VehicleByType = (props) => {
   const router = useRouter();
@@ -20,17 +21,9 @@ const VehicleByType = (props) => {
       )
     ).json();
     setVehicles(updateVehicles);
-  }, [page,order]);
+  }, [page, order]);
   return (
     <>
-      <Navbar
-        auth={true}
-        menu={
-          <li className="li-menu">
-            <InputSearch />
-          </li>
-        }
-      />
       <section id="cars" className="container mt-margin-navbar-1 mb-16">
         <div className="flex flex-col flex-wrap w-full">
           <p className="font-Playfair_Display font-bold text-2xl md:text-4xl flex">
@@ -72,20 +65,27 @@ const VehicleByType = (props) => {
           )}
         </div>
       </section>
-      <Footer />
     </>
   );
 };
 
 export async function getServerSideProps(context) {
-  const type = await (await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types/${context.params.id}`)).json()).data;
-  const vehicles = await (
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/type/${context.params.id}?page=1&limit=20`)
-  ).json();
+  try {
+    const type = await (
+      await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types/${context.params.id}`)).json()
+    ).data;
+    const vehicles = await (
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/type/${context.params.id}?page=1&limit=20`)
+    ).json();
 
-  return {
-    props: { vehicles, type },
-  };
+    return {
+      props: { vehicles, type },
+    };
+  } catch (error) {
+    return {
+      props: { vehicles: [], type: {} },
+    };
+  }
 }
 
-export default VehicleByType;
+export default PublicRoute(VehicleByType);

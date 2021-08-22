@@ -4,13 +4,14 @@ import { InputCount } from '../../components/base';
 import { useRouter } from 'next/router';
 import style from '../../styles/vehicle.module.css';
 import { useState } from 'react';
+import PublicRoute from '../../components/hoc/PublicRoute';
+
 const VehicleDetail = (props) => {
   const router = useRouter();
   const [count, setCount] = useState(1);
   const [showImgGallery, setShowImgGallery] = useState(props.vehicle.vehicle_images[0].vehicle_image);
   return (
     <>
-      <Navbar auth={true} />
       <section className="mt-margin-navbar-1 mb-16 container">
         <div className="w-full flex flex-row mb-14 cursor-pointer" onClick={() => router.back()}>
           <img className="h-8 w-5" src="/assets/icon/black-arrow-back.png" alt="arrow-back" />
@@ -47,32 +48,40 @@ const VehicleDetail = (props) => {
             <InputCount value={count} styleContainer="w-full sm:w-1/2" />
           </div>
         </div>
-        {/* <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
-          <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold">Chat Admin</button>
-          <button
-            className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold"
-            onClick={() => router.push('/reservation')}
-          >
-            Reservation
-          </button>
-          <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold flex items-center justify-center">
-            <img src="/assets/icon/love.png" className="h-8 mr-5" alt="icon-love" />
-            <p>Like</p>
-          </button>
-        </div> */}
-        <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
-          <button className="btn-secondary w-full md:w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold">
-            Add to home page
-          </button>
-          <button
-            className="btn-primary w-full md:w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold"
-            onClick={() => router.push(`/vehicle/update/${router.query.id}`)}
-          >
-            Edit item
-          </button>
-        </div>
+        {props.user?.roles === 'admin' ? (
+          <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
+            <button className="btn-secondary w-full md:w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold">
+              Add to home page
+            </button>
+            <button
+              className="btn-primary w-full md:w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold"
+              onClick={() => router.push(`/vehicle/update/${router.query.id}`)}
+            >
+              Edit item
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
+            <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold">Chat Admin</button>
+            <button
+              className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold"
+              onClick={() => {
+                if (props.auth) {
+                  router.push('/reservation');
+                } else {
+                  router.push('/auth/login');
+                }
+              }}
+            >
+              Reservation
+            </button>
+            <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold flex items-center justify-center">
+              <img src="/assets/icon/love.png" className="h-8 mr-5" alt="icon-love" />
+              <p>Like</p>
+            </button>
+          </div>
+        )}
       </section>
-      <Footer />
     </>
   );
 };
@@ -91,4 +100,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default VehicleDetail;
+export default PublicRoute(VehicleDetail);
