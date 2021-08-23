@@ -12,7 +12,7 @@ const Dropdown = (props) => {
       )}
       {props.type === 'img' && (
         <div className={style['dropdown-container']}>
-          <img src={props.src} className={props.styleImg}>
+          <img src={props.src} className={props.styleImg} alt="img-icon-dropdwon">
             {props.text}
           </img>
           <ul className={`${style.dropdwon} ${props.styleDropdown}`}>{props.children}</ul>

@@ -5,19 +5,19 @@ const TestimonialDescription = (props) => {
       <div className={`${style['testimonial-description']} ${props.styleTestimonialDescription}`}>
         <ul>
           <li>
-            <img src="/assets/icon/star.png" />
+            <img src="/assets/icon/star.png" alt="star" />
           </li>
           <li>
-            <img src="/assets/icon/star.png" />
+            <img src="/assets/icon/star.png" alt="star" />
           </li>
           <li>
-            <img src="/assets/icon/star.png" />
+            <img src="/assets/icon/star.png" alt="star" />
           </li>
           <li>
-            <img src="/assets/icon/star.png" />
+            <img src="/assets/icon/star.png" alt="star" />
           </li>
           <li>
-            <img src="/assets/icon/star.png" />
+            <img src="/assets/icon/star.png" alt="star" />
           </li>
         </ul>
         <p className="font-Mulish text-xl mt-5">
