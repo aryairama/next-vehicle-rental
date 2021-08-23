@@ -19,13 +19,15 @@ const persistConfig = {
   whitelist: ['user', 'reservation'],
 };
 
-let store;
+export let store;
 export const persistedReducer = persistReducer(persistConfig, rootReducers);
 function initStore(initialState = {}) {
   if (process.env.NODE_ENV !== 'production') {
-    return createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)));
+    store = createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)));
+  } else {
+    store = createStore(persistedReducer, initialState, applyMiddleware(thunkMiddleware));
   }
-  return createStore(persistedReducer, initialState, applyMiddleware(thunkMiddleware));
+  return store;
 }
 
 export const initializeStore = (preloadedState) => {

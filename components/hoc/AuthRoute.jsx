@@ -27,7 +27,7 @@ function checkAuth(gssp) {
       return {
         redirect: {
           destination: '/',
-          permanent: true,
+          permanent: false,
         },
       };
     }
