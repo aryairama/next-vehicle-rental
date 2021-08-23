@@ -2,13 +2,13 @@
 import { Navbar, Footer } from '../../components/module';
 import { Input, InputAuth, SelectOption, InputCount } from '../../components/base';
 import { useRouter } from 'next/router';
-import { useState,useRef } from 'react';
+import { useState, useRef } from 'react';
 import style from '../../styles/vehicle.module.css';
 import { addVehicle } from '../../configs/ConsumeApi/Vehicle';
 import SimpleReactValidator from 'simple-react-validator';
 const AddVehicle = (props) => {
   const router = useRouter();
-  const validator = useRef(new SimpleReactValidator({className:'text-red-500 text-sm'}))
+  const validator = useRef(new SimpleReactValidator({ className: 'text-red-500 text-sm' }));
   const [formData, setFormData] = useState({
     location_id: '',
     type_id: '',
@@ -189,25 +189,31 @@ const AddVehicle = (props) => {
 };
 
 export async function getServerSideProps(context) {
-  let locations = await (
-    await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
-  ).data;
-  locations = locations.map((location) => {
+  try {
+    let locations = await (
+      await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
+    ).data;
+    locations = locations.map((location) => {
+      return {
+        label: location.location_name,
+        value: location.location_id,
+      };
+    });
+    let types = await (await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)).json()).data;
+    types = types.map((type) => {
+      return {
+        label: type.type_name,
+        value: type.type_id,
+      };
+    });
     return {
-      label: location.location_name,
-      value: location.location_id,
+      props: { locations, types },
     };
-  });
-  let types = await (await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)).json()).data;
-  types = types.map((type) => {
+  } catch (error) {
     return {
-      label: type.type_name,
-      value: type.type_id,
+      props: { locations: [], types: [] },
     };
-  });
-  return {
-    props: { locations, types },
-  };
+  }
 }
 
 export default AddVehicle;

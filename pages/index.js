@@ -158,6 +158,7 @@ export async function getServerSideProps(context) {
       props: { locations, types },
     };
   } catch (error) {
+    console.log(error);
     return {
       props: { locations: [], types: [] },
     };

@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import { Navbar, Footer } from '../../../components/module';
-import { Input, InputAuth, SelectOption, InputCount, LayoutInput,InputCheck } from '../../../components/base';
+import { Input, InputAuth, SelectOption, InputCount, LayoutInput, InputCheck } from '../../../components/base';
 import { useRouter } from 'next/router';
-import { useState, useEffect,useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import style from '../../../styles/vehicle.module.css';
 import { updateVehicle, deleteVehicle } from '../../../configs/ConsumeApi/Vehicle';
 import SimpleReactValidator from 'simple-react-validator';
@@ -19,7 +19,7 @@ const UpdateVehicle = (props) => {
     stock: 0,
     description: '',
     vehicle_image: [],
-    old_vehicle_image:[],
+    old_vehicle_image: [],
   });
   const handlerInputChange = (e) => {
     setFormData((oldValue) => {
@@ -236,33 +236,39 @@ const UpdateVehicle = (props) => {
 };
 
 export async function getServerSideProps(context) {
-  let locations = await (
-    await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
-  ).data;
-  locations = locations.map((location) => {
+  try {
+    let locations = await (
+      await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
+    ).data;
+    locations = locations.map((location) => {
+      return {
+        label: location.location_name,
+        value: location.location_id,
+      };
+    });
+    let types = await (await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)).json()).data;
+    types = types.map((type) => {
+      return {
+        label: type.type_name,
+        value: type.type_id,
+      };
+    });
+    const vehicle = await (
+      await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/${context.params.id}`)).json()
+    )?.data;
+    if (!vehicle) {
+      return {
+        notFound: true,
+      };
+    }
     return {
-      label: location.location_name,
-      value: location.location_id,
+      props: { locations, types, vehicle },
     };
-  });
-  let types = await (await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/types?pagination=off`)).json()).data;
-  types = types.map((type) => {
+  } catch (error) {
     return {
-      label: type.type_name,
-      value: type.type_id,
-    };
-  });
-  const vehicle = await (
-    await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/${context.params.id}`)).json()
-  )?.data;
-  if (!vehicle) {
-    return {
-      notFound: true,
+      props: { locations: [], types: [], vehicle: {} },
     };
   }
-  return {
-    props: { locations, types, vehicle },
-  };
 }
 
 export default UpdateVehicle;
