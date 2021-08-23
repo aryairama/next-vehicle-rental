@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Navbar, Footer } from '../../components/module';
 import { SelectOption } from '../../components/base';
 import { useRouter } from 'next/router';
 import style from '../../styles/payment.module.css';
+import { PrivateRoute, authPrivateRoute } from '../../components/hoc/PrivateRoute';
+
 const Payment = () => {
   const router = useRouter();
   const payment = [
@@ -15,7 +16,6 @@ const Payment = () => {
   ];
   return (
     <>
-      <Navbar auth={true} />
       <section className="mt-margin-navbar-1 mb-16 container">
         <div className="w-full flex flex-row mb-14 cursor-pointer" onClick={() => router.back()}>
           <img className="h-8 w-5" src="/assets/icon/black-arrow-back.png" alt="arrow-back" />
@@ -80,9 +80,9 @@ const Payment = () => {
           </button>
         </div>
       </section>
-      <Footer />
     </>
   );
 };
 
-export default Payment;
+export const getServerSideProps = authPrivateRoute(['member'], (context, redux) => ({ props: {} }));
+export default PrivateRoute(Payment);

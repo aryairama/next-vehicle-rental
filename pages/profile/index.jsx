@@ -1,10 +1,10 @@
-import { Navbar, Footer } from '../../components/module';
 import { LayoutInput, InputCheck, Input } from '../../components/base';
 import Image from 'next/image';
+import { PrivateRoute, authPrivateRoute } from '../../components/hoc/PrivateRoute';
+
 const Profile = () => {
   return (
     <>
-      <Navbar auth={true} />
       <section id="profile" className="mt-margin-navbar-1 container mb-16">
         <p className="font-Nunito text-2xl font-bold">Profile</p>
         <div className="flex flex-col flex-wrap items-center mt-12">
@@ -43,9 +43,9 @@ const Profile = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 };
 
-export default Profile;
+export const getServerSideProps = authPrivateRoute(['member','admin'], (context, redux) => ({ props: {} }));
+export default PrivateRoute(Profile);

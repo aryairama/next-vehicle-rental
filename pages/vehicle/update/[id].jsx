@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import { Navbar, Footer } from '../../../components/module';
 import { Input, InputAuth, SelectOption, InputCount, LayoutInput, InputCheck } from '../../../components/base';
 import { useRouter } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import style from '../../../styles/vehicle.module.css';
 import { updateVehicle, deleteVehicle } from '../../../configs/ConsumeApi/Vehicle';
 import SimpleReactValidator from 'simple-react-validator';
+import { PrivateRoute, authPrivateRoute } from '../../../components/hoc/PrivateRoute';
+
 const UpdateVehicle = (props) => {
   const router = useRouter();
   const validator = useRef(new SimpleReactValidator({ className: 'text-red-500 text-sm' }));
@@ -46,7 +47,6 @@ const UpdateVehicle = (props) => {
   }, [router.query.id]);
   return (
     <>
-      <Navbar auth={true} />
       <section id="add-vehicle" className="container mt-margin-navbar-1">
         <div className="w-full flex flex-row mb-14 cursor-pointer" onClick={() => router.back()}>
           <img className="h-8 w-5" src="/assets/icon/black-arrow-back.png" alt="arrow-back" />
@@ -230,12 +230,11 @@ const UpdateVehicle = (props) => {
           </button>
         </div>
       </section>
-      <Footer />
     </>
   );
 };
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = authPrivateRoute(['admin'], async (context, redux) => {
   try {
     let locations = await (
       await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
@@ -269,6 +268,6 @@ export async function getServerSideProps(context) {
       props: { locations: [], types: [], vehicle: {} },
     };
   }
-}
+});
 
-export default UpdateVehicle;
+export default PrivateRoute(UpdateVehicle);

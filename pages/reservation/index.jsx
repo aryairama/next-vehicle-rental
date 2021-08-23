@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { Navbar, Footer } from '../../components/module';
 import { InputCount, SelectOption, InputAuth } from '../../components/base';
 import { useRouter } from 'next/router';
 import style from '../../styles/vehicle.module.css';
 import { useState } from 'react';
+import { PrivateRoute, authPrivateRoute } from '../../components/hoc/PrivateRoute';
+
 const Reservation = () => {
   const router = useRouter();
   const [count, setCount] = useState(1);
@@ -18,7 +19,6 @@ const Reservation = () => {
   ];
   return (
     <>
-      <Navbar auth={true} />
       <section className="mt-margin-navbar-1 mb-16 container">
         <div className="w-full flex flex-row mb-14 cursor-pointer" onClick={() => router.back()}>
           <img className="h-8 w-5" src="/assets/icon/black-arrow-back.png" alt="arrow-back" />
@@ -61,9 +61,9 @@ const Reservation = () => {
           </button>
         </div>
       </section>
-      <Footer />
     </>
   );
 };
 
-export default Reservation;
+export const getServerSideProps = authPrivateRoute(['member'], (context, redux) => ({ props: {} }));
+export default PrivateRoute(Reservation);
