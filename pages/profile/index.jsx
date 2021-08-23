@@ -47,5 +47,5 @@ const Profile = () => {
   );
 };
 
-export const getServerSideProps = authPrivateRoute(['member','admin'], (context, redux) => ({ props: {} }));
+export const getServerSideProps = authPrivateRoute(['user','admin'], (context, redux) => ({ props: {} }));
 export default PrivateRoute(Profile);

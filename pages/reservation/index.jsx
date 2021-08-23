@@ -65,5 +65,5 @@ const Reservation = () => {
   );
 };
 
-export const getServerSideProps = authPrivateRoute(['member'], (context, redux) => ({ props: {} }));
+export const getServerSideProps = authPrivateRoute(['user'], (context, redux) => ({ props: {} }));
 export default PrivateRoute(Reservation);

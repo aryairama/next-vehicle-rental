@@ -84,5 +84,5 @@ const Payment = () => {
   );
 };
 
-export const getServerSideProps = authPrivateRoute(['member'], (context, redux) => ({ props: {} }));
+export const getServerSideProps = authPrivateRoute(['user'], (context, redux) => ({ props: {} }));
 export default PrivateRoute(Payment);

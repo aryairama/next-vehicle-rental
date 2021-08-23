@@ -6,7 +6,7 @@ export const login = (formData, history) => async (dispatch) => {
     const { data } = await (await axios.post('/users/login', formData)).data;
     dispatch({ type: 'LOGIN', payload: data });
     swal('Success', 'Login successful', 'success');
-    history.back()
+    history.back();
   } catch (error) {
     swal('Failed', error?.response?.data?.message, 'error');
     console.log(error);
@@ -21,5 +21,20 @@ export const logout = (history) => async (dispatch, getState) => {
     history.push('/auth/login');
   } catch (error) {
     swal('Error', 'Logout failed', 'error');
+  }
+};
+
+export const register = async (formData, history) => {
+  try {
+    await axios.post('/users/register', formData);
+    swal('Registration is successful', 'Please check your email for email verification!', 'success');
+    history.push('/auth/login');
+  } catch (error) {
+    if (error.response?.data?.statusCode === 422) {
+      swal('Failed', error?.response?.data?.error[0].msg, 'error');
+    } else {
+      swal('Error', 'Registration failed', 'error');
+      console.log(error);
+    }
   }
 };
