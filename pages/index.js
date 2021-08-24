@@ -1,6 +1,4 @@
 import {
-  Navbar,
-  Footer,
   CardContainer,
   CardImgOverlay,
   CardTextOverlay,
@@ -83,48 +81,46 @@ const Home = (props) => {
       <section id="populer-in-town" className="container mt-16">
         <div className="flex flex-row flex-wrap w-full justify-between">
           <p className="font-Playfair_Display font-bold text-2xl md:text-4xl w-1/2">Popular in town</p>
-          <div className="flex flex-row w-1/2 justify-end items-center gap-2">
+          <div
+            className="flex flex-row w-1/2 justify-end items-center gap-2 cursor-pointer"
+            onClick={() => router.push(`/type/${6}`)}
+          >
             <p className="font-Nunito text-orange text-base">View all</p>
             <img className="h-3 w-2" src="/assets/icon/right-arrow-orange.png" alt="arrow" />
           </div>
         </div>
         <CardTemplate>
-          <CardContainer>
-            <CardImgOverlay src="/assets/img/populer/1.png" />
-            <CardTextOverlay>
-              <p className="truncate font-semibold text-base">Merapi</p>
-              <p className="truncate text-grey-1">Yogyakarta</p>
-            </CardTextOverlay>
-          </CardContainer>
-          <CardContainer>
-            <CardImgOverlay src="/assets/img/populer/2.png" />
-            <CardTextOverlay>
-              <p className="truncate font-semibold text-base">Merapi</p>
-              <p className="truncate text-grey-1">Yogyakarta</p>
-            </CardTextOverlay>
-          </CardContainer>
-          <CardContainer>
-            <CardImgOverlay src="/assets/img/populer/3.png" />
-            <CardTextOverlay>
-              <p className="truncate font-semibold text-base">Merapi</p>
-              <p className="truncate text-grey-1">Yogyakarta</p>
-            </CardTextOverlay>
-          </CardContainer>
-          <CardContainer>
-            <CardImgOverlay src="/assets/img/populer/4.png" />
-            <CardTextOverlay>
-              <p className="truncate font-semibold text-base">Merapi</p>
-              <p className="truncate text-grey-1">Yogyakarta</p>
-            </CardTextOverlay>
-          </CardContainer>
-          <CardContainer>
-            <CardImgOverlay src="/assets/img/populer/1.png" />
-            <CardTextOverlay>
-              <p className="truncate font-semibold text-base">Merapi</p>
-              <p className="truncate text-grey-1">Yogyakarta</p>
-            </CardTextOverlay>
-          </CardContainer>
+          {props.populerInTown.map((populer, index) => (
+            <CardContainer
+              styleCard="cursor-pointer"
+              onClick={() => router.push(`/vehicle/${populer.vehicle_id}`)}
+              key={index}
+            >
+              <CardImgOverlay src={`${process.env.NEXT_PUBLIC_API_URL}/${populer.vehicle_image}`} />
+              <CardTextOverlay>
+                <p className="truncate font-semibold text-base">{populer.vehicles_name}</p>
+                <p className="truncate text-grey-1">{populer.location_name}</p>
+              </CardTextOverlay>
+            </CardContainer>
+          ))}
         </CardTemplate>
+        {props.populerInTown.length === 0 && (
+          <p className="text-black-1 font-Playfair_Display text-center font-bold text-lg my-6">
+            Populer vehicle not found
+          </p>
+        )}
+        <div
+          className={`flex flex-row flex-wrap w-full justify-center mt-12 ${
+            props.user?.roles === 'admin' ? 'block' : 'hidden'
+          }`}
+        >
+          <button
+            onClick={() => router.push('/vehicle/add')}
+            className="btn-secondary py-4 rounded-lg font-Nunito text-xl font-bold w-full md:w-1/2"
+          >
+            Add new item
+          </button>
+        </div>
       </section>
       <section id="testimonials" className="container mt-16">
         <div className="flex flex-row flex-wrap w-full justify-between">
@@ -154,8 +150,9 @@ export async function getServerSideProps(context) {
         value: type.type_name,
       };
     });
+    const { data: populerInTown } = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/type/${6}`)).json();
     return {
-      props: { locations, types },
+      props: { locations, types, populerInTown },
     };
   } catch (error) {
     console.log(error);
