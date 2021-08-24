@@ -17,6 +17,12 @@ const userReducer = (state = initialState, action) => {
         user: action.payload,
         auth: false,
       };
+    case 'PROFILE':
+      return {
+        ...state,
+        user: action.payload,
+        auth: true,
+      };
     default:
       return state;
   }

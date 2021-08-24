@@ -234,7 +234,7 @@ const UpdateVehicle = (props) => {
   );
 };
 
-export const getServerSideProps = authPrivateRoute(['admin'], async (context, redux) => {
+export const getServerSideProps = async (context) => {
   try {
     let locations = await (
       await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
@@ -268,6 +268,6 @@ export const getServerSideProps = authPrivateRoute(['admin'], async (context, re
       props: { locations: [], types: [], vehicle: {} },
     };
   }
-});
+};
 
-export default PrivateRoute(UpdateVehicle);
+export default PrivateRoute(UpdateVehicle, ['admin']);

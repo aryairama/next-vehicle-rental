@@ -5,7 +5,7 @@ import { useState, useRef } from 'react';
 import style from '../../styles/vehicle.module.css';
 import { addVehicle } from '../../configs/ConsumeApi/Vehicle';
 import SimpleReactValidator from 'simple-react-validator';
-import { PrivateRoute, authPrivateRoute } from '../../components/hoc/PrivateRoute';
+import { PrivateRoute } from '../../components/hoc/PrivateRoute';
 
 const AddVehicle = (props) => {
   const router = useRouter();
@@ -187,7 +187,7 @@ const AddVehicle = (props) => {
   );
 };
 
-export const getServerSideProps = authPrivateRoute(['admin'], async (context, redux) => {
+export const getServerSideProps = async (context) => {
   try {
     let locations = await (
       await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/locations?pagination=off`)).json()
@@ -213,6 +213,6 @@ export const getServerSideProps = authPrivateRoute(['admin'], async (context, re
       props: { locations: [], types: [] },
     };
   }
-});
+};
 
-export default PrivateRoute(AddVehicle);
+export default PrivateRoute(AddVehicle, ['admin']);

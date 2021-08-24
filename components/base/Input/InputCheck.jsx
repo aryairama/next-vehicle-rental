@@ -10,7 +10,7 @@ const InputCheck = (props) => {
           name={props.name}
           id={props.id}
           onBlur={props.onBlur}
-          onChange={props.onClick}
+          onChange={props.onChange}
           checked={props.defaultChecked === props.value ? true : false}
         />
       )}
@@ -22,7 +22,7 @@ const InputCheck = (props) => {
           name={props.name}
           id={props.id}
           onBlur={props.onBlur}
-          onChange={props.onClick}
+          onChange={props.onChange}
         />
       )}
       <label htmlFor={props.id} className={`${style.label} ${props.styleLabel}`}>

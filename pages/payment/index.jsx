@@ -2,7 +2,7 @@
 import { SelectOption } from '../../components/base';
 import { useRouter } from 'next/router';
 import style from '../../styles/payment.module.css';
-import { PrivateRoute, authPrivateRoute } from '../../components/hoc/PrivateRoute';
+import { PrivateRoute } from '../../components/hoc/PrivateRoute';
 
 const Payment = () => {
   const router = useRouter();
@@ -84,5 +84,4 @@ const Payment = () => {
   );
 };
 
-export const getServerSideProps = authPrivateRoute(['user'], (context, redux) => ({ props: {} }));
-export default PrivateRoute(Payment);
+export default PrivateRoute(Payment, ['user']);

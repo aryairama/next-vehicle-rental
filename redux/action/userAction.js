@@ -38,3 +38,13 @@ export const register = async (formData, history) => {
     }
   }
 };
+
+export const getProfile = () => async (dispatch) => {
+  try {
+    const { data } = await (await axios.get('/users/profile')).data;
+    dispatch({ type: 'PROFILE', payload: data });
+  } catch (error) {
+    dispatch({ type: 'LOGOUT', payload: {} });
+    dispatch({ type: 'ADD_RESERVATION', payload: {} });
+  }
+};

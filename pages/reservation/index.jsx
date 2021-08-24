@@ -3,7 +3,7 @@ import { InputCount, SelectOption, InputAuth } from '../../components/base';
 import { useRouter } from 'next/router';
 import style from '../../styles/vehicle.module.css';
 import { useState } from 'react';
-import { PrivateRoute, authPrivateRoute } from '../../components/hoc/PrivateRoute';
+import { PrivateRoute } from '../../components/hoc/PrivateRoute';
 
 const Reservation = () => {
   const router = useRouter();
@@ -65,5 +65,4 @@ const Reservation = () => {
   );
 };
 
-export const getServerSideProps = authPrivateRoute(['user'], (context, redux) => ({ props: {} }));
-export default PrivateRoute(Reservation);
+export default PrivateRoute(Reservation, ['user']);

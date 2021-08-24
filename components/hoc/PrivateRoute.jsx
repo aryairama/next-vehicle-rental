@@ -1,14 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Navbar, Footer } from '../module';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { InputSearch } from '../base';
-import { initializeStore } from '../../redux/store';
-import { parseCookieRedux } from './AuthRoute';
+import { useEffect } from 'react';
 
-const PrivateRoute = (Component) => {
+const PrivateRoute = (Component, roles = []) => {
   const Private = (props) => {
     const router = useRouter();
     const { user, auth } = useSelector((state) => state.user);
+    useEffect(() => {
+      let access = false;
+      for (let i = 0; i < roles.length; i++) {
+        if (user.roles === roles[i]) {
+          access = true;
+          break;
+        } else if (user.roles !== roles[i]) {
+          access = false;
+        }
+      }
+      if (auth === false) {
+        return router.push('/auth/login');
+      } else if (!access) {
+        return router.push('/');
+      }
+    }, []);
     return (
       <>
         {router.pathname === '/type/[id]' && auth ? (
@@ -32,41 +48,4 @@ const PrivateRoute = (Component) => {
   return Private;
 };
 
-function authPrivateRoute(roles, gssp) {
-  return async (context) => {
-    const {
-      req: { cookies },
-      res,
-    } = context;
-    const redux = initializeStore(parseCookieRedux(cookies.vehicleRental));
-    const {
-      user: { auth, user },
-    } = redux.getState();
-    let access = false;
-    for (let i = 0; i < roles.length; i++) {
-      if (user.roles === roles[i]) {
-        access = true;
-        break;
-      } else if (user.roles !== roles[i]) {
-        access = false;
-      }
-    }
-    if (auth === false) {
-      return {
-        redirect: {
-          destination: '/auth/login',
-          permanent: false,
-        },
-      };
-    } else if (!access) {
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      };
-    }
-    return await gssp(context, redux);
-  };
-}
-export { PrivateRoute, authPrivateRoute };
+export { PrivateRoute };
