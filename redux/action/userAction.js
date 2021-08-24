@@ -48,3 +48,28 @@ export const getProfile = () => async (dispatch) => {
     dispatch({ type: 'ADD_RESERVATION', payload: {} });
   }
 };
+
+export const updateProfile = (formData) => async (dispatch, getState) => {
+  try {
+    const dataUpdate = new FormData();
+    dataUpdate.append('email', formData.email);
+    if (formData.profile_img) {
+      dataUpdate.append('profile_img', formData.profile_img);
+    }
+    dataUpdate.append('name', formData.name);
+    dataUpdate.append('gender', formData.gender);
+    dataUpdate.append('phone_number', formData.phone_number);
+    dataUpdate.append('address', formData.address);
+    dataUpdate.append('date_of_birth', formData.date_of_birth);
+    const { data } = await (await axios.post(`/users/${getState().user.user.user_id}`, dataUpdate)).data;
+    dispatch({ type: 'PROFILE', payload: { ...getState().user.user, ...data } });
+    swal('Success', 'Successfully changed profile', 'success');
+  } catch (error) {
+    if (error.response?.data?.statusCode === 422) {
+      swal('Failed', error?.response?.data?.error[0].msg, 'error');
+    } else {
+      swal('Error', 'Update profile failed', 'error');
+      console.log(error);
+    }
+  }
+};

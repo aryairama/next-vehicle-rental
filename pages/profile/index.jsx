@@ -1,13 +1,29 @@
 import { LayoutInput, InputCheck, Input } from '../../components/base';
-import Image from 'next/image';
 import { PrivateRoute } from '../../components/hoc/PrivateRoute';
 import { useDispatch } from 'react-redux';
 import { useState, useRef } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
+import { updateProfile as updateProfileUser } from '../../redux/action/userAction';
 
 const Profile = (props) => {
   const dispatch = useDispatch();
-  const validator = useRef(new SimpleReactValidator({ className: 'text-red-600 text-sm' }));
+  const validator = useRef(
+    new SimpleReactValidator({
+      className: 'text-red-600 text-sm',
+      validators: {
+        imageMaxSize: {
+          message: ':attribute cannot be more than :values megabytes.',
+          rule: (val, params, validator) => {
+            if (parseInt(val.size, 10) > 1024 * 1024 * parseInt(params[0])) {
+              return false;
+            }
+            return true;
+          },
+          messageReplace: (message, params) => message.replace(':values', params[0]), // optional
+        },
+      },
+    })
+  );
   const initialState = {
     email: '',
     profile_img: '',
@@ -17,7 +33,16 @@ const Profile = (props) => {
     address: '',
     date_of_birth: '',
   };
-  const [updateProfile, setUpdateProfile] = useState(props.user ? { ...props.user, email: '' } : initialState);
+  const [updateProfile, setUpdateProfile] = useState(
+    props.user
+      ? {
+          ...props.user,
+          email: '',
+          profile_img: '',
+          date_of_birth: props.user.date_of_birth ? new Date(props.user.date_of_birth).toISOString().slice(0, 10) : '',
+        }
+      : initialState
+  );
   const onChangeUpdateProfile = (e) => {
     setUpdateProfile((oldValue) => {
       return { ...oldValue, [e.target.name]: e.target.value };
@@ -28,13 +53,57 @@ const Profile = (props) => {
       <section id="profile" className="mt-margin-navbar-1 container mb-16">
         <p className="font-Nunito text-2xl font-bold">Profile</p>
         <div className="flex flex-col flex-wrap items-center mt-12">
-          <Image
-            src="/assets/img/profile/2.png"
-            className="rounded-full"
-            width="130px"
-            height="130px"
-            alt="img-profile"
-          />
+          <div className="relative">
+            <label htmlFor="profile_img">
+              {props.user.profile_img && props.user.profile_img.length > 10 && !updateProfile.profile_img && (
+                <img
+                  className="rounded-full h-32 w-32 object-contain"
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${props.user.profile_img}`}
+                  alt="img-profile"
+                />
+              )}
+              {updateProfile.profile_img && !props.user.profile_img && (
+                <img
+                  className="rounded-full h-32 w-32 object-contain"
+                  src={URL.createObjectURL(updateProfile.profile_img)}
+                  alt="img-profile"
+                />
+              )}
+              {!updateProfile.profile_img && !props.user.profile_img && (
+                <img
+                  className="rounded-full h-32 w-32 object-contain"
+                  src="/assets/img/profile/2.png"
+                  alt="img-profile"
+                />
+              )}
+              {updateProfile.profile_img && props.user.profile_img && (
+                <img
+                  className="rounded-full h-32 w-32 object-contain"
+                  src={URL.createObjectURL(updateProfile.profile_img)}
+                  alt="img-profile"
+                />
+              )}
+            </label>
+            <label htmlFor="profile_img" className="absolute right-2 bottom-1">
+              <img className="w-8 h-8" src="/assets/icon/profile.png" alt="icon-change-img-profile" />
+            </label>
+            <input
+              className="hidden"
+              type="file"
+              name="profile_img"
+              id="profile_img"
+              accept="image/jpeg, image/png"
+              onChange={(e) => {
+                setUpdateProfile((oldValue) => {
+                  return { ...oldValue, profile_img: e.target.files[0] };
+                });
+                validator.current.showMessageFor('profile_img');
+              }}
+            />
+          </div>
+          <div className="mt-2">
+            {validator.current.message('profile_img', updateProfile.profile_img, 'imageMaxSize:2')}
+          </div>
           <p className="font-bold font-Playfair_Display text-2xl mt-5 mb-1">{props.user?.name}</p>
           <p className="font-Nunito text-md text-grey-1">{props.user?.email}</p>
           <p className="font-Nunito text-md text-grey-1">{props.user?.phone_number}</p>
@@ -118,7 +187,11 @@ const Profile = (props) => {
               <Input
                 name="date_of_birth"
                 value={updateProfile.date_of_birth ? updateProfile.date_of_birth : ''}
-                onChange={onChangeUpdateProfile}
+                onChange={(e) =>
+                  setUpdateProfile((oldValue) => {
+                    return { ...oldValue, date_of_birth: new Date(e.target.value).toISOString().slice(0, 10) };
+                  })
+                }
                 onBlur={() => validator.current.showMessageFor('date_of_birth')}
                 type="date"
                 label="DD/MM/YY"
@@ -128,7 +201,13 @@ const Profile = (props) => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
-            <button className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold">Save Change</button>
+            <button
+              onClick={() => dispatch(updateProfileUser(updateProfile))}
+              disabled={validator.current.allValid() ? false : true}
+              className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold disabled:bg-gray-200"
+            >
+              Save Change
+            </button>
             <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold">Edit Password</button>
             <button className="btn-gray px-20 py-5 rounded-lg font-Nunito text-xl font-bold ">Cancel</button>
           </div>
