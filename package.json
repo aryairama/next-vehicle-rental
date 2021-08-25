@@ -17,6 +17,7 @@
     "nanoid": "^3.1.25",
     "next": "11.1.0",
     "next-redux-wrapper": "^7.0.2",
+    "nextjs-progressbar": "0.0.11",
     "rc-pagination": "^3.1.9",
     "react": "17.0.2",
     "react-dom": "17.0.2",
