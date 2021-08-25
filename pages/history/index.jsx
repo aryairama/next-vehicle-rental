@@ -58,7 +58,7 @@ const History = (props) => {
               </div>
             </div>
             <div className="flex flex-col mt-5">
-              {history?.data.map((history, index) => (
+              {history?.data?.map((history, index) => (
                 <div key={index} className="w-full flex gap-6 border rounded-xl mb-4">
                   <div className="w-2/5 md:w-1/4">
                     <img
