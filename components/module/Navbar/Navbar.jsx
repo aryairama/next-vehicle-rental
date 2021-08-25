@@ -44,10 +44,10 @@ const Navbar = (props) => {
                   <a className="li-menu-a">Vehicle Type</a>
                 </Link>
               </li>
-              <li className="li-menu">
-                <a className="li-menu-a" href="">
-                  History
-                </a>
+              <li className={`li-menu ${router.pathname === '/history' ? 'active' : ''}`}>
+                <Link href="/history">
+                  <a className="li-menu-a">History</a>
+                </Link>
               </li>
               <li className="li-menu">
                 <a className="li-menu-a" href="">
