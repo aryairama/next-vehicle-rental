@@ -158,7 +158,7 @@ const AddVehicle = (props) => {
             >
               {validator.current.message('status', formData.status, 'required')}
             </SelectOption>
-            <InputCount onClick={setFormData} value={formData.stock} styleContainer="!mt-0" />
+            <InputCount name="stock" onClick={setFormData} value={formData.stock} styleContainer="!mt-0" />
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">

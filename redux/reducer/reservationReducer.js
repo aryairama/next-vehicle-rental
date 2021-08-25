@@ -9,6 +9,11 @@ const reservationReducer = (state = initialState, action) => {
         ...state,
         reservation: action.payload,
       };
+    case 'CLEAR_RESERVATION':
+      return {
+        ...state,
+        reservation: action.payload,
+      };
     default:
       return state;
   }

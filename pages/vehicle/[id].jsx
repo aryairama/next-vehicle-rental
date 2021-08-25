@@ -1,14 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import { Navbar, Footer } from '../../components/module';
 import { InputCount } from '../../components/base';
 import { useRouter } from 'next/router';
 import style from '../../styles/vehicle.module.css';
 import { useState } from 'react';
 import PublicRoute from '../../components/hoc/PublicRoute';
+import { useDispatch } from 'react-redux';
 
 const VehicleDetail = (props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
-  const [count, setCount] = useState(1);
+  const [reservation, setReservation] = useState({
+    stock: 1,
+  });
   const [showImgGallery, setShowImgGallery] = useState(props.vehicle.vehicle_images[0].vehicle_image);
   return (
     <>
@@ -45,7 +48,13 @@ const VehicleDetail = (props) => {
             <p className="font-Nunito text-xl mt-2 text-red-700 font-light">No prepayment</p>
             <p className="text-grey-1 mt-3">{props?.vehicle?.description} </p>
             <p className="font-Playfair_Display text-2xl md:text-3xl font-bold mt-6">{`Rp.${props?.vehicle?.price}/day`}</p>
-            <InputCount value={count} styleContainer="w-full sm:w-1/2" />
+            <InputCount
+              name="stock"
+              max={props.vehicle.stock}
+              onClick={setReservation}
+              value={reservation.stock}
+              styleContainer="w-full sm:w-1/2"
+            />
           </div>
         </div>
         {props.user?.roles === 'admin' ? (
@@ -67,6 +76,10 @@ const VehicleDetail = (props) => {
               className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold"
               onClick={() => {
                 if (props.auth) {
+                  dispatch({
+                    type: 'ADD_RESERVATION',
+                    payload: { ...props.vehicle, reservation_stock: reservation.stock },
+                  });
                   router.push('/reservation');
                 } else {
                   router.push('/auth/login');
