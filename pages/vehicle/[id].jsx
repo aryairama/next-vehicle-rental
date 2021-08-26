@@ -113,4 +113,27 @@ export async function getServerSideProps(context) {
   };
 }
 
+//ssg
+// export async function getStaticPaths() {
+//   let { data: paths } = await (await axios.get(`/vehicles?pagination=off`)).data;
+//   paths = paths.map((path) => ({
+//     params: { id: path.vehicle_id.toString() },
+//   }));
+//   return { paths, fallback: true };
+// }
+
+// export async function getStaticProps(context) {
+//   const vehicle = await (
+//     await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/${context.params.id}`)).json()
+//   )?.data;
+//   if (!vehicle) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+//   return {
+//     props: { vehicle },
+//   };
+// }
+
 export default PublicRoute(VehicleDetail);
