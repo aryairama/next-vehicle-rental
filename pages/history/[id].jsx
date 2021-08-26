@@ -156,7 +156,10 @@ export async function getServerSideProps({ req, params }) {
   } catch (error) {
     if (error?.response?.data?.statusCode === 404) {
       return {
-        notFound: true,
+        redirect: {
+          destination: '/history',
+          permanent: false,
+        },
       };
     }
     return {
