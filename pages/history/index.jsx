@@ -6,7 +6,10 @@ import { default as axios } from '../../configs/axiosConfig';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
 const History = (props) => {
+  const router = useRouter();
   const [page, setPage] = useState(1);
   const [history, setHistory] = useState({ ...props.history });
   const [historySearch, setHistorySearch] = useState({
@@ -59,7 +62,11 @@ const History = (props) => {
             </div>
             <div className="flex flex-col mt-5">
               {history?.data?.map((history, index) => (
-                <div key={index} className="w-full flex gap-6 border rounded-xl mb-4">
+                <div
+                  onClick={() => router.push(`/history/${history.rental_id}`)}
+                  key={index}
+                  className="w-full flex gap-6 border rounded-xl mb-4 cursor-pointer"
+                >
                   <div className="w-2/5 md:w-1/4">
                     <img
                       className="w-full h-40 rounded-xl bg-contain"

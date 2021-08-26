@@ -25,3 +25,16 @@ export const addResrrvation = (data, history) => async (dispatch, getState) => {
     console.log(error);
   }
 };
+
+export const updateReservation = async (status, id, history) => {
+  try {
+    await axios.patch(`/reservations/${id}`, {
+      status,
+    });
+    history.push('/history');
+    swal('Success', 'successfully update reservation data', 'success');
+  } catch (error) {
+    swal('Error', 'Failed update reservation data', 'error');
+    console.log(error);
+  }
+};
