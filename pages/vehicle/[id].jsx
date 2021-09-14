@@ -59,9 +59,6 @@ const VehicleDetail = (props) => {
         </div>
         {props.user?.roles === 'admin' ? (
           <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
-            <button className="btn-secondary w-full md:w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold">
-              Add to home page
-            </button>
             <button
               className="btn-primary w-full md:w-1/3 py-5 rounded-lg font-Nunito text-xl font-bold"
               onClick={() => router.push(`/vehicle/update/${router.query.id}`)}
@@ -71,7 +68,6 @@ const VehicleDetail = (props) => {
           </div>
         ) : (
           <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
-            <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold">Chat Admin</button>
             <button
               className="btn-primary px-20 py-5 rounded-lg font-Nunito text-xl font-bold"
               onClick={() => {
@@ -87,10 +83,6 @@ const VehicleDetail = (props) => {
               }}
             >
               Reservation
-            </button>
-            <button className="btn-secondary px-20 py-5 rounded-lg font-Nunito text-xl font-bold flex items-center justify-center">
-              <img src="/assets/icon/love.png" className="h-8 mr-5" alt="icon-love" />
-              <p>Like</p>
             </button>
           </div>
         )}
