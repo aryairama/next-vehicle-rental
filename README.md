@@ -1,34 +1,101 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next Js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/).
 
-## Getting Started
+[Demo application](https://bit.ly/3CahMah)
+## Contents
 
-First, run the development server:
+- [Contents](#contents)
+- [About](#about)
+- [Packages](#packages)
+  - [Built With](#built-with)
+  - [Packages](#packages-1)
+- [Installation](#installation)
+- [Vehicle Rental - Backend](#backend)
+- [Screenshots](#screenshots)
+- [Author](#author)
 
-```bash
-npm run dev
-# or
-yarn dev
+## About
+
+<p align="justify">
+Vehicle Rental adalah aplikasi rental kendaraan yang dibuat dengan next js, express js, tailwind css dan beberapa teknologi lainya. Vehicle rental menyediakan tiga tipe kendaraan yaitu montor, mobil, dan sepeda. User dapat memesan sebelum hari pemakaian.
+
+## Packages
+
+### Built With
+
+- [Tailwind Css](https://tailwindcss.com/)
+- [Next Js](https://nextjs.org/)
+- and other
+
+### Packages
+    dependencies
+    "@splidejs/react-splide": "^0.4.4",
+    "axios": "^0.21.1",
+    "cookie": "^0.4.1",
+    "cookies-js": "^1.2.3",
+    "js-cookie": "^3.0.0",
+    "nanoid": "^3.1.25",
+    "next": "11.1.0",
+    "next-redux-wrapper": "^7.0.2",
+    "nextjs-progressbar": "0.0.11",
+    "rc-pagination": "^3.1.9",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
+    "redux-persist-cookie-storage": "^1.0.0",
+    "redux-thunk": "^2.3.0",
+    "simple-react-validator": "^1.6.1",
+    "sweetalert": "^2.1.2"
+
+    devDependencies
+    "autoprefixer": "^10.3.1",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.0",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.7"
+
+## Installation
+
+- Clone This Front End Repo
+
+```
+git clone https://github.com/aryairama/next-vehicle-rental.git
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Go To Folder Repo
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+cd next-vehicle-rental
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Install Module
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+npm install
+```
 
-## Learn More
+- Type ` npm run production` To Start Website
 
-To learn more about Next.js, take a look at the following resources:
+<br/>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Backend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+:rocket: [`Backend Vehicle Rental`](https://github.com/aryairama/express-vehicle-rental.git)
 
-## Deploy on Vercel
+<br/>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Screenshots
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<div align="center">
+  <img width="250px" src="https://drive.google.com/uc?export=view&id=1p74l-jz4OlHWyyE61l6yIcIDrA8M9HZi" alt= border="0" />
+  <img width="250px" src="https://drive.google.com/uc?export=view&id=1W8tONNGP2GnUCHt3tRbXDEyRbxEEMv7F" alt= border="0" /> 
+  <img width="250px" src="https://drive.google.com/uc?export=view&id=1z-ORZ2c1KABzR6bXZbaoTrbGHO3l8Fa2" alt= border="0" />
+  <img width="250px" src="https://drive.google.com/uc?export=view&id=1p9oRkNoh3onJ_kUcymdCKwPj5r7m4BIi" alt= border="0" />
+</div>
+
+## Author
+
+[Arya Irama Wahono](https://github.com/aryairama) - https://github.com/aryairama
