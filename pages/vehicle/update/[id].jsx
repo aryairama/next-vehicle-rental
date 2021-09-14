@@ -128,7 +128,7 @@ const UpdateVehicle = (props) => {
                     styleInput="!mr-0"
                     value={previewImg.image_id}
                     type="checkbox"
-                    onClick={old_vehicle_image}
+                    onChange={old_vehicle_image}
                     key={index}
                     label={
                       <img
