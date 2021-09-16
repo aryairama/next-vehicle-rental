@@ -150,7 +150,9 @@ export async function getServerSideProps(context) {
         value: type.type_name,
       };
     });
-    const { data: populerInTown } = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles/type/${6}`)).json();
+    const { data: populerInTown } = await (
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vehicles?fieldOrder=count_rental&limit=5&order=desc`)
+    ).json();
     return {
       props: { locations, types, populerInTown },
     };
