@@ -11,14 +11,14 @@ const Index = (props) => {
         <InputSearch placeholder="Search vehicle (ex, cars, cars name)" />
         <div className="mt-16">
           <div className="flex flex-row flex-wrap w-full justify-between">
-            <p className="font-Playfair_Display font-bold text-2xl md:text-4xl w-1/2">Popular in town</p>
-            <div
+            <p className="font-Playfair_Display font-bold text-2xl md:text-4xl w-full">Popular in town</p>
+            {/* <div
               className="flex flex-row w-1/2 justify-end items-center gap-2 cursor-pointer"
               onClick={() => router.push(`/type/${6}`)}
             >
               <p className="font-Nunito text-orange text-base">View all</p>
               <img className="h-3 w-2" src="/assets/icon/right-arrow-orange.png" alt="arrow" />
-            </div>
+            </div> */}
           </div>
           <CardTemplate>
             {props.populerInTown.map((populer, index) => (
