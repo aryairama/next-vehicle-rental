@@ -49,11 +49,11 @@ const Navbar = (props) => {
                   <a className="li-menu-a">History</a>
                 </Link>
               </li>
-              <li className="li-menu">
+              {/* <li className="li-menu">
                 <a className="li-menu-a" href="">
                   About
                 </a>
-              </li>
+              </li> */}
               {props.auth === false && (
                 <>
                   <li className="li-menu">
@@ -76,6 +76,7 @@ const Navbar = (props) => {
                   </li>
                   <li className="li-menu">
                     <Dropdown
+                      id="menu-profile"
                       type="img"
                       src={
                         props?.user?.profile_img
@@ -90,10 +91,10 @@ const Navbar = (props) => {
                         </Link>
                         <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
                       </DropdownItem>
-                      <DropdownItem>
+                      {/* <DropdownItem>
                         <p className="text-sm font-bold mr-6">Help</p>
                         <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
-                      </DropdownItem>
+                      </DropdownItem> */}
                       <DropdownItem onClick={() => dispatch(logout(router))}>
                         <p className="text-sm font-bold mr-6">Logout</p>
                         <img src="/assets/icon/arrow-right.png" className="h-3 w-2" alt="arrow-right" />
