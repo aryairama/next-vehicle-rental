@@ -111,7 +111,7 @@ Contributions are what make the open source community such an amazing place to b
 
 
 ## Related Project
-:rocket: [`Backend Vehicle Rental`](https://github.com/aryairama/arkademy-express-TokoKu)
+:rocket: [`Backend Vehicle Rental`](https://github.com/aryairama/express-vehicle-rental)
 
 :rocket: [`Frontend Vehicle Rental`](https://github.com/aryairama/next-vehicle-rental)
 
