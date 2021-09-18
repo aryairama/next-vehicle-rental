@@ -38,7 +38,7 @@ const Home = (props) => {
                     onChange={onSearchHandler}
                     type="select"
                     styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
-                    styleOption="!text-white !bg-white !opacity-40"
+                    styleOption="!text-black-1 !bg-white !opacity-40"
                     options={[
                       {
                         value: '',
@@ -55,7 +55,7 @@ const Home = (props) => {
                     onChange={onSearchHandler}
                     type="select"
                     styleInput="!text-black-1 !bg-white !opacity-40 !py-3"
-                    styleOption="!text-white !bg-white !opacity-40"
+                    styleOption="!text-black-1 !bg-white !opacity-40"
                     options={[
                       {
                         value: '',

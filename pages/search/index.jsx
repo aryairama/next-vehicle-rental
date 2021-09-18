@@ -46,7 +46,7 @@ const Search = (props) => {
             styleArrow="!top-5"
             styleContainer="!w-1/4 !my-2 mr-2"
             styleInput="!text-black-1 !text-base !bg-white !pl-7 !py-2 border border-gray-300"
-            styleOption="!text-white !bg-white"
+            styleOption="!text-black-1 !bg-white"
             options={[
               {
                 value: '',
@@ -63,7 +63,7 @@ const Search = (props) => {
             styleArrow="!top-5"
             styleContainer="!w-1/4 !my-2"
             styleInput="!text-black-1 !text-base !bg-white !pl-7 !py-2 border border-gray-300"
-            styleOption="!text-white !bg-white"
+            styleOption="!text-black-1 !bg-white"
             options={[
               {
                 value: '',
