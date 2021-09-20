@@ -156,6 +156,7 @@ export async function getServerSideProps({ req, params }) {
         })
       ).json()
     ).data;
+    console.log(resevationData);
     return {
       props: {
         resevationData,
