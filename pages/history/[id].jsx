@@ -139,7 +139,7 @@ const DetailReservation = (props) => {
   );
 };
 
-export async function getServerSideProps({ req, params }) {
+export async function getServerSideProps(context) {
   try {
     // const { data: detailReservation } = await (
     //   await axios.get(`/reservations/${params.id}`, {
@@ -149,14 +149,11 @@ export async function getServerSideProps({ req, params }) {
     // ).data;
     const resevationData = await (
       await (
-        await fetch(`https://api-vehicle-rental.arya-irama-wahono.xyz/reservations/17`, {
-          headers: {
-            Cookie: req.headers.cookie,
-          },
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reservations/${context.params.id}`, {
+          headers: { Cookie: context.req.headers.cookie },
         })
       ).json()
-    ).data;
-    console.log(resevationData);
+    )?.data;
     return {
       props: {
         resevationData,
