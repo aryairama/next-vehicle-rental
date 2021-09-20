@@ -35,45 +35,45 @@ const DetailReservation = (props) => {
           <div className={style['preview-img']}>
             <img
               className="rounded-xl h-96 w-full object-contain"
-              src={`${process.env.NEXT_PUBLIC_API_URL}/${props.detailReservation?.vehicle_image}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${props.resevationData?.vehicle_image}`}
               alt="preview-vehicle"
             />
           </div>
           <div className={style['description-payment']}>
-            <p className={style['title-vehicle']}>{props.detailReservation?.vehicles_name}</p>
-            <p className={style['vehicle-location']}>{props.detailReservation?.location_name}</p>
+            <p className={style['title-vehicle']}>{props.resevationData?.vehicles_name}</p>
+            <p className={style['vehicle-location']}>{props.resevationData?.location_name}</p>
             <p className={style['text-prepayment']}>No prepayment</p>
-            <p className={style['text-booking-code']}>{props.detailReservation?.invoice_number}</p>
+            <p className={style['text-booking-code']}>{props.resevationData?.invoice_number}</p>
             <button className={`${style['btn-copy-booking-code']} btn-primary`}>Copy booking code</button>
           </div>
         </div>
         <div className={`${style['template-order-details']} mt-10 `}>
           <div className={style['detail-order-section-1']}>
-            <p className={style.quantity}>Quantity : {props.detailReservation?.quantity} Vehicle</p>
+            <p className={style.quantity}>Quantity : {props.resevationData?.quantity} Vehicle</p>
             <div className={style['order-details']}>
               <p>Order Details : </p>
               <ul>
                 {vehicle_detail(
-                  props.detailReservation?.quantity,
-                  props.detailReservation?.vehicle_price,
-                  props.detailReservation?.long_borrowed
+                  props.resevationData?.quantity,
+                  props.resevationData?.vehicle_price,
+                  props.resevationData?.long_borrowed
                 )}
               </ul>
-              <p className={style['subtotal']}>Totals : {props.detailReservation?.cost}</p>
+              <p className={style['subtotal']}>Totals : {props.resevationData?.cost}</p>
             </div>
           </div>
           <div className={style['detail-order-section-2']}>
             <div className={style['reservation-date']}>
               <p className="mr-5">Reservation Date : </p>
-              <p className={style['text-date']}>{moment(props.detailReservation?.start_date).format('L')}</p>
+              <p className={style['text-date']}>{moment(props.resevationData?.start_date).format('L')}</p>
             </div>
             <div className={style.identity}>
               <p>Identity : </p>
               <ul>
                 <li>
-                  {props.detailReservation?.name} ({props.detailReservation?.phone_number})
+                  {props.resevationData?.name} ({props.resevationData?.phone_number})
                 </li>
-                <li>{props.detailReservation?.email}</li>
+                <li>{props.resevationData?.email}</li>
               </ul>
             </div>
           </div>
@@ -82,16 +82,16 @@ const DetailReservation = (props) => {
           <div className="flex flex-row w-full md:w-1/2 items-center">
             <p className="w-1/4">Payment code : </p>
             <div className="w-3/4 border rounded-lg border-grey-1 p-4 flex flex-row">
-              <p className="w-3/4">{props.detailReservation?.invoice_number}</p>
+              <p className="w-3/4">{props.resevationData?.invoice_number}</p>
               <button className="btn-secondary rounded-lg w-1/4">Copy</button>
             </div>
           </div>
           <div className="w-full md:w-1/3 border rounded-lg border-grey-1 p-4 text-center">
-            Pay with {props.detailReservation?.payment}
+            Pay with {props.resevationData?.payment}
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
-          {props.user?.roles === 'user' && props.detailReservation?.status === 'pending' && (
+          {props.user?.roles === 'user' && props.resevationData?.status === 'pending' && (
             <button
               onClick={() => updateReservation('canceled', router.query.id, router)}
               className="btn-primary py-5 rounded-lg font-Nunito text-xl font-bold w-full md:w-1/2"
@@ -99,7 +99,7 @@ const DetailReservation = (props) => {
               Cancel
             </button>
           )}
-          {props.user?.roles === 'user' && props.detailReservation?.status === 'approved' && (
+          {props.user?.roles === 'user' && props.resevationData?.status === 'approved' && (
             <button
               onClick={() => updateReservation('returned', router.query.id, router)}
               className="btn-primary py-5 rounded-lg font-Nunito text-xl font-bold w-full md:w-1/2"
@@ -141,18 +141,28 @@ const DetailReservation = (props) => {
 export default PrivateRoute(DetailReservation, ['admin', 'user']);
 export async function getServerSideProps({ req, params }) {
   try {
-    const { data: detailReservation } = await (
-      await axios.get(`/reservations/${params.id}`, {
-        withCredentials: true,
-        headers: { Cookie: req.headers.cookie },
-      })
+    // const { data: detailReservation } = await (
+    //   await axios.get(`/reservations/${params.id}`, {
+    //     withCredentials: true,
+    //     headers: { Cookie: req.headers.cookie },
+    //   })
+    // ).data;
+    const resevationData = await (
+      await (
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reservations/${params.id}`, {
+          headers: {
+            Cookie: req.headers.cookie,
+          },
+        })
+      ).json()
     ).data;
     return {
       props: {
-        detailReservation,
+        resevationData,
       },
     };
   } catch (error) {
+    console.log(error);
     if (error?.response?.data?.statusCode === 404) {
       return {
         redirect: {
@@ -162,7 +172,7 @@ export async function getServerSideProps({ req, params }) {
       };
     }
     return {
-      props: { detailReservation: {} },
+      props: { resevationData: {} },
     };
   }
 }
