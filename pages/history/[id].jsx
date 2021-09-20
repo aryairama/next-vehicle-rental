@@ -138,7 +138,6 @@ const DetailReservation = (props) => {
   );
 };
 
-export default PrivateRoute(DetailReservation, ['admin', 'user']);
 export async function getServerSideProps({ req, params }) {
   try {
     // const { data: detailReservation } = await (
@@ -176,3 +175,5 @@ export async function getServerSideProps({ req, params }) {
     };
   }
 }
+
+export default PrivateRoute(DetailReservation, ['admin', 'user']);
