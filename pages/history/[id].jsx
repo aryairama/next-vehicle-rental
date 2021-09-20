@@ -24,7 +24,6 @@ const DetailReservation = (props) => {
     }
     return detail;
   };
-  console.log(props.detailReservation);
   return (
     <>
       <section className="mt-margin-navbar-1 mb-16 container">
