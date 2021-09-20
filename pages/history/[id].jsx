@@ -27,6 +27,7 @@ const DetailReservation = (props) => {
   return (
     <>
       <section className="mt-margin-navbar-1 mb-16 container">
+        <p>{JSON.stringify(props.resevationData)}</p>
         <div className="w-full flex flex-row mb-14 cursor-pointer" onClick={() => router.back()}>
           <img className="h-8 w-5" src="/assets/icon/black-arrow-back.png" alt="arrow-back" />
           <p className="text-2xl font-bold ml-8 font-Nunito">History</p>
