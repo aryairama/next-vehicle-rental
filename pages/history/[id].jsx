@@ -33,11 +33,11 @@ const DetailReservation = (props) => {
         </div>
         <div className={style['template-payment']}>
           <div className={style['preview-img']}>
-            <img
+            {/* <img
               className="rounded-xl h-96 w-full object-contain"
               src={`${process.env.NEXT_PUBLIC_API_URL}/${props.resevationData?.vehicle_image}`}
               alt="preview-vehicle"
-            />
+            /> */}
           </div>
           <div className={style['description-payment']}>
             <p className={style['title-vehicle']}>{props.resevationData?.vehicles_name}</p>
