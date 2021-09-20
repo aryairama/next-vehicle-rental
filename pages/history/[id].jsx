@@ -27,18 +27,18 @@ const DetailReservation = (props) => {
   return (
     <>
       <section className="mt-margin-navbar-1 mb-16 container">
-        <p>{JSON.stringify(props.resevationData)}</p>
+        {/* <p>{JSON.stringify(props.resevationData)}</p> */}
         <div className="w-full flex flex-row mb-14 cursor-pointer" onClick={() => router.back()}>
           <img className="h-8 w-5" src="/assets/icon/black-arrow-back.png" alt="arrow-back" />
           <p className="text-2xl font-bold ml-8 font-Nunito">History</p>
         </div>
         <div className={style['template-payment']}>
           <div className={style['preview-img']}>
-            {/* <img
+            <img
               className="rounded-xl h-96 w-full object-contain"
               src={`${process.env.NEXT_PUBLIC_API_URL}/${props.resevationData?.vehicle_image}`}
               alt="preview-vehicle"
-            /> */}
+            />
           </div>
           <div className={style['description-payment']}>
             <p className={style['title-vehicle']}>{props.resevationData?.vehicles_name}</p>
@@ -141,22 +141,18 @@ const DetailReservation = (props) => {
 
 export async function getServerSideProps(context) {
   try {
-    // const { data: detailReservation } = await (
-    //   await axios.get(`/reservations/${params.id}`, {
-    //     withCredentials: true,
-    //     headers: { Cookie: req.headers.cookie },
-    //   })
-    // ).data;
     const resevationData = await (
       await (
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reservations/${context.params.id}`, {
+          credentials: 'include',
           headers: { Cookie: context.req.headers.cookie },
+          
         })
       ).json()
     )?.data;
     return {
       props: {
-        resevationData,
+        resevationData : resevationData || {},
       },
     };
   } catch (error) {
