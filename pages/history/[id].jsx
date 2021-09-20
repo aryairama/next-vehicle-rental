@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import style from '../../styles/payment.module.css';
 import { useState } from 'react';
 import { updateReservation } from '../../redux/action/reservationAction';
+import moment from 'moment';
 
 const DetailReservation = (props) => {
   const router = useRouter();
@@ -65,9 +66,7 @@ const DetailReservation = (props) => {
           <div className={style['detail-order-section-2']}>
             <div className={style['reservation-date']}>
               <p className="mr-5">Reservation Date : </p>
-              <p className={style['text-date']}>
-                {/* {new Date(props.detailReservation?.start_date).toISOString().slice(0, 10)} */}
-              </p>
+              <p className={style['text-date']}>{moment(props.detailReservation?.start_date).format('L')}</p>
             </div>
             <div className={style.identity}>
               <p>Identity : </p>
