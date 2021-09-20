@@ -23,6 +23,7 @@ const DetailReservation = (props) => {
     }
     return detail;
   };
+  console.log(props.detailReservation);
   return (
     <>
       <section className="mt-margin-navbar-1 mb-16 container">
@@ -65,7 +66,7 @@ const DetailReservation = (props) => {
             <div className={style['reservation-date']}>
               <p className="mr-5">Reservation Date : </p>
               <p className={style['text-date']}>
-                {new Date(props.detailReservation?.start_date).toISOString().slice(0, 10)}
+                {/* {new Date(props.detailReservation?.start_date).toISOString().slice(0, 10)} */}
               </p>
             </div>
             <div className={style.identity}>
