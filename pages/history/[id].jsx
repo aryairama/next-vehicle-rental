@@ -148,7 +148,7 @@ export async function getServerSideProps({ req, params }) {
     // ).data;
     const resevationData = await (
       await (
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reservations/${params.id}`, {
+        await fetch(`https://api-vehicle-rental.arya-irama-wahono.xyz/reservations/17`, {
           headers: {
             Cookie: req.headers.cookie,
           },
