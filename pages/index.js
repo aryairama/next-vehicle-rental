@@ -90,7 +90,7 @@ const Home = (props) => {
           </div>
         </div>
         <CardTemplate>
-          {props.populerInTown.map((populer, index) => (
+          {props.populerInTown?.map((populer, index) => (
             <CardContainer
               styleCard="cursor-pointer"
               onClick={() => router.push(`/vehicle/${populer.vehicle_id}`)}
@@ -104,7 +104,7 @@ const Home = (props) => {
             </CardContainer>
           ))}
         </CardTemplate>
-        {props.populerInTown.length === 0 && (
+        {props.populerInTown?.length === 0 && (
           <p className="text-black-1 font-Playfair_Display text-center font-bold text-lg my-6">
             Populer vehicle not found
           </p>
@@ -159,7 +159,7 @@ export async function getServerSideProps(context) {
   } catch (error) {
     console.log(error);
     return {
-      props: { locations: [], types: [] },
+      props: { locations: [], types: [], populerInTown: [] },
     };
   }
 }
