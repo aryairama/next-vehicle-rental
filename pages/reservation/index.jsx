@@ -24,7 +24,7 @@ const Reservation = (props) => {
       : '',
   });
   const longReservation = [
-    { label: 'long borrowed', value: '' },
+    { label: 'Duration', value: '' },
     { label: '1day', value: 1 },
     { label: '2day', value: 2 },
     { label: '3day', value: 3 },
