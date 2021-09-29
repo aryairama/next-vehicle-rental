@@ -26,6 +26,7 @@ module.exports = {
       brown: '#6A4029',
       orange: '#FB8F1D',
       black: colors.black,
+      blacktransparant: 'rgba(31, 28, 28, 0.521)',
       white: colors.white,
       gray: colors.coolGray,
       red: colors.red,

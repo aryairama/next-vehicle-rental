@@ -7,8 +7,10 @@ import style from '../../../styles/vehicle.module.css';
 import { updateVehicle, deleteVehicle } from '../../../configs/ConsumeApi/Vehicle';
 import SimpleReactValidator from 'simple-react-validator';
 import { PrivateRoute, authPrivateRoute } from '../../../components/hoc/PrivateRoute';
+import { useDispatch } from 'react-redux';
 
 const UpdateVehicle = (props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const validator = useRef(new SimpleReactValidator({ className: 'text-red-500 text-sm' }));
   const [formData, setFormData] = useState({
@@ -217,13 +219,13 @@ const UpdateVehicle = (props) => {
           </SelectOption>
           <button
             disabled={validator.current.allValid() ? false : true}
-            onClick={() => updateVehicle(formData, router, router.query.id)}
+            onClick={() => dispatch(updateVehicle(formData, router, router.query.id))}
             className="btn-primary py-5 rounded-lg font-Nunito text-xl font-bold w-full disabled:bg-gray-300"
           >
             Save Changes
           </button>
           <button
-            onClick={() => deleteVehicle(router.query.id, router)}
+            onClick={() => dispatch(deleteVehicle(router.query.id, router))}
             className="btn-secondary py-5 rounded-lg font-Nunito text-xl font-bold w-full"
           >
             Delete

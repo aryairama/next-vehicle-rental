@@ -7,8 +7,10 @@ import style from '../../styles/payment.module.css';
 import { useState, useEffect } from 'react';
 import { updateReservation } from '../../redux/action/reservationAction';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 
 const DetailReservation = (props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [status, setStatus] = useState('approved');
   const [resevationData, setResevationData] = useState({});
@@ -105,7 +107,7 @@ const DetailReservation = (props) => {
         <div className="flex flex-col md:flex-row gap-3 md:gap-10 w-full mt-10 justify-center">
           {props.user?.roles === 'user' && resevationData?.status === 'pending' && (
             <button
-              onClick={() => updateReservation('canceled', router.query.id, router)}
+              onClick={() => dispatch(updateReservation('canceled', router.query.id, router))}
               className="btn-primary py-5 rounded-lg font-Nunito text-xl font-bold w-full md:w-1/2"
             >
               Cancel
@@ -113,7 +115,7 @@ const DetailReservation = (props) => {
           )}
           {props.user?.roles === 'user' && resevationData?.status === 'approved' && (
             <button
-              onClick={() => updateReservation('returned', router.query.id, router)}
+              onClick={() => dispatch(updateReservation('returned', router.query.id, router))}
               className="btn-primary py-5 rounded-lg font-Nunito text-xl font-bold w-full md:w-1/2"
             >
               Return Vehicle
@@ -137,7 +139,7 @@ const DetailReservation = (props) => {
                 ]}
               ></SelectOption>
               <button
-                onClick={() => updateReservation(status, router.query.id, router)}
+                onClick={() => dispatch(updateReservation(status, router.query.id, router))}
                 className="btn-secondary py-5 rounded-lg font-Nunito text-xl font-bold w-full md:w-2/5"
               >
                 Update

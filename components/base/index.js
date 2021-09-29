@@ -8,6 +8,7 @@ export { default as InputCount } from './InputCount/InputCount';
 export { default as LayoutInput } from './Input/LayoutInput';
 export { default as InputCheck } from './Input/InputCheck';
 export { default as Input } from './Input/Input';
+export { default as Loader } from './Loader/Loader';
 
 export const buttonItemRender = (current, type, element) => {
   if (type === 'prev') {

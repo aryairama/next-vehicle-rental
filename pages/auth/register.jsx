@@ -6,8 +6,10 @@ import { checkAuth } from '../../components/hoc/AuthRoute';
 import SimpleReactValidator from 'simple-react-validator';
 import { useRef, useState } from 'react';
 import { register } from '../../redux/action/userAction';
+import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const validator = useRef(new SimpleReactValidator({ className: 'text-white text-sm' }));
   const [regisUser, setRegisUser] = useState({
@@ -71,7 +73,7 @@ const SignUp = () => {
               </InputAuth>
               <button
                 disabled={validator.current.allValid() ? false : true}
-                onClick={() => register(regisUser, router)}
+                onClick={() => dispatch(register(regisUser, router))}
                 className="btn-primary p-4 rounded-lg text-2xl font-bold disabled:bg-secondary disabled:text-primary"
               >
                 Sign Up

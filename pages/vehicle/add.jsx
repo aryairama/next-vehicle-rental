@@ -6,8 +6,10 @@ import style from '../../styles/vehicle.module.css';
 import { addVehicle } from '../../configs/ConsumeApi/Vehicle';
 import SimpleReactValidator from 'simple-react-validator';
 import { PrivateRoute } from '../../components/hoc/PrivateRoute';
+import { useDispatch } from 'react-redux';
 
 const AddVehicle = (props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const validator = useRef(new SimpleReactValidator({ className: 'text-red-500 text-sm' }));
   const [formData, setFormData] = useState({
@@ -176,7 +178,7 @@ const AddVehicle = (props) => {
           </SelectOption>
           <button
             disabled={validator.current.allValid() ? false : true}
-            onClick={() => addVehicle(formData, router)}
+            onClick={() => dispatch(addVehicle(formData, router))}
             className="btn-primary py-5 rounded-lg font-Nunito text-xl font-bold w-full md:w-1/3 disabled:bg-gray-300"
           >
             Save
