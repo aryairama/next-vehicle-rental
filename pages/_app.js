@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import '../styles/globals.css';
 import '../styles/navbar.css';
 import { useStore } from '../redux/store';
@@ -6,7 +7,7 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import { persistStore } from 'redux-persist';
 import Wrapper from '../components/Wrapper';
 import NextNProgress from 'nextjs-progressbar';
-import { useRouter } from 'next/router';
+import router from 'next/router';
 import { useEffect, useState } from 'react';
 import { Loader } from '../components/base';
 
@@ -15,22 +16,25 @@ function MyApp({ Component, pageProps }) {
   const persistor = persistStore(store, {}, function () {
     persistor.persist();
   });
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [bg, setBg] = useState('');
+  const start = () => {
+    setLoading(true);
+    setBg('white');
+  };
+  const end = () => {
+    setLoading(false);
+    setBg('');
+  };
   useEffect(() => {
-    router.events.on('routeChangeStart', () => {
-      setLoading(true);
-      setBg('white');
-    });
-    router.events.on('routeChangeComplete', () => {
-      setLoading(false);
-      setBg('');
-    });
-    router.events.on('routeChangeError', () => {
-      setLoading(false);
-      setBg('');
-    });
+    router.events.on('routeChangeStart', start);
+    router.events.on('routeChangeComplete', end);
+    router.events.on('routeChangeError', end);
+    return () => {
+      router.events.off('routeChangeStart', start);
+      router.events.off('routeChangeComplete', end);
+      router.events.off('routeChangeError', end);
+    };
   }, [router]);
   return (
     <Provider store={store}>
