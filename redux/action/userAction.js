@@ -3,7 +3,7 @@ import swal from 'sweetalert';
 
 export const login = (formData, history) => async (dispatch) => {
   try {
-    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
     const { data } = await (await axios.post('/users/login', formData)).data;
     dispatch({ type: 'LOGIN', payload: data });
     swal('Success', 'Login successful', 'success');
@@ -12,12 +12,12 @@ export const login = (formData, history) => async (dispatch) => {
     swal('Failed', error?.response?.data?.message, 'error');
     console.log(error);
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };
 
 export const logout = (history) => async (dispatch, getState) => {
   try {
-    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
     await axios.delete('/users/logout');
     dispatch({ type: 'LOGOUT', payload: {} });
     dispatch({ type: 'ADD_RESERVATION', payload: {} });
@@ -25,12 +25,12 @@ export const logout = (history) => async (dispatch, getState) => {
   } catch (error) {
     swal('Error', 'Logout failed', 'error');
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };
 
 export const register = (formData, history) => async (dispatch) => {
   try {
-    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
     await axios.post('/users/register', formData);
     swal('Registration is successful', 'Please check your email for email verification!', 'success');
     history.push('/auth/login');
@@ -42,7 +42,7 @@ export const register = (formData, history) => async (dispatch) => {
       console.log(error);
     }
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };
 
 export const getProfile = () => async (dispatch) => {
@@ -59,7 +59,7 @@ export const getProfile = () => async (dispatch) => {
 
 export const updateProfile = (formData) => async (dispatch, getState) => {
   try {
-    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
     const dataUpdate = new FormData();
     dataUpdate.append('email', formData.email);
     if (formData.profile_img) {
@@ -81,5 +81,5 @@ export const updateProfile = (formData) => async (dispatch, getState) => {
       console.log(error);
     }
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };

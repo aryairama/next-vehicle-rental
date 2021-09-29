@@ -3,7 +3,7 @@ import swal from 'sweetalert';
 
 export const addResrrvation = (data, history) => async (dispatch, getState) => {
   try {
-    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
     const {
       reservation: { reservation },
     } = getState();
@@ -25,12 +25,12 @@ export const addResrrvation = (data, history) => async (dispatch, getState) => {
     swal('Error', 'Failed added reservation data', 'error');
     console.log(error);
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };
 
 export const updateReservation = (status, id, history) => async (dispatch) => {
   try {
-    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
     await axios.patch(`/reservations/${id}`, {
       status,
     });
@@ -40,5 +40,5 @@ export const updateReservation = (status, id, history) => async (dispatch) => {
     swal('Error', 'Failed update reservation data', 'error');
     console.log(error);
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };

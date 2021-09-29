@@ -2,7 +2,7 @@ import swal from 'sweetalert';
 import { default as axios } from '../axiosConfig';
 
 export const addVehicle = (formData, history) => async (dispatch) => {
-  dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
   const dataAddVehicle = new FormData();
   dataAddVehicle.append('location_id', formData.location_id);
   dataAddVehicle.append('type_id', formData.type_id);
@@ -25,23 +25,23 @@ export const addVehicle = (formData, history) => async (dispatch) => {
       console.log(error);
     }
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };
 
 export const deleteVehicle = (id, history) => async (dispatch) => {
   try {
-    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+    dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
     await axios.delete(`/vehicles/${id}`);
     swal('Success', 'Successfully delete vehicle', 'success');
     history.push('/type');
   } catch (error) {
     console.log(error);
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };
 
 export const updateVehicle = (formData, history, id) => async (dispatch) => {
-  dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: true, bg: 'blacktransparant' } });
   const dataAddVehicle = new FormData();
   dataAddVehicle.append('location_id', formData.location_id);
   dataAddVehicle.append('type_id', formData.type_id);
@@ -69,5 +69,5 @@ export const updateVehicle = (formData, history, id) => async (dispatch) => {
       console.log(error);
     }
   }
-  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'bg-blacktransparant' } });
+  dispatch({ type: 'SET_SHOW', payload: { show: false, bg: 'blacktransparant' } });
 };

@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     router.events.on('routeChangeStart', () => {
       setLoading(true);
-      setBg('bg-white');
+      setBg('white');
     });
     router.events.on('routeChangeComplete', () => {
       setLoading(false);
